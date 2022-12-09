@@ -1,8 +1,12 @@
 <h1 align="center">Attendance-System-for-Devskill</h1>
 
+<h3>
+
 This is a Project from Dev Skill. All rights reserved by **[Rubaiyad Noor Shahriar](https://flowcv.me/rubaiyad-noor-shahriar-hridoy)** and **[Dev Skill Authority](https://devskill.com/)**
 
-### Features and Project Description
+</h3>
+
+# Features and Project Description
 - Core features are implemented with C#10  (.NET 6) and Object Oriented Programming (OOP) concepts
 - Database - Microsoft SQL 2016
 - Technologies - ADO.NET, Entity Framework
