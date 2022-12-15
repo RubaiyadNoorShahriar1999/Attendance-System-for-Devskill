@@ -1,1 +1,1 @@
-﻿Console.WriteLine("Hello World");
+﻿Console.WriteLine(((char)0x221A).ToString());

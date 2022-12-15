@@ -12,10 +12,12 @@ namespace AttendanceSystem
         private string UserName { get; set; }
         private string Password { get; set; }
 
+
         public DateTime schedule { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         DateTime ClassSchedule.schedule { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         int ClassSchedule.number { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         public Admin() { }
+        
     }
 }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AttendanceSystem
 {
-    internal interface ClassSchedule
+    public interface ClassSchedule
     {
         DateTime schedule { get; set; }
         protected int number { get; set; }
