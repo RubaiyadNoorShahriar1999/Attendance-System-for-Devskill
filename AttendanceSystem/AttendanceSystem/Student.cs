@@ -14,6 +14,9 @@ namespace AttendanceSystem
 
         private DateTime schedule;
 
-        public Student() { }
+        public Student() 
+        {
+
+        }
     }
 }

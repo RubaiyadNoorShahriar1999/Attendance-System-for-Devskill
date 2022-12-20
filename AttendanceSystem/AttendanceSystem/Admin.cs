@@ -6,18 +6,21 @@ using System.Threading.Tasks;
 
 namespace AttendanceSystem
 {
-    public class Admin : User , ClassSchedule
+    public class Admin : User 
     {
         private string Name { get; set; }
         private string UserName { get; set; }
         private string Password { get; set; }
 
+        public Admin(string name, string userName,string password) 
+        {
+            this.Name = name;
+            this.UserName = userName;
+            this.Password = password;
 
-        public DateTime schedule { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        DateTime ClassSchedule.schedule { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        int ClassSchedule.number { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-
-        public Admin() { }
+            Console.WriteLine("Menu:\n 1. Assign Course to a Teacher\n 2.Assign Course to a Student\n 3. Set class schedule for a course");
+            int choice = Convert.ToInt32(Console.ReadLine());
+        }
         
     }
 }

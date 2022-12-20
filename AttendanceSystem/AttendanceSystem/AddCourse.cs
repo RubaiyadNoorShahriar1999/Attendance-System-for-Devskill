@@ -6,11 +6,13 @@ using System.Threading.Tasks;
 
 namespace AttendanceSystem
 {
-    public class Course
+    public class AddCourse
     {
-        protected string CourseName { get; set; }
+        protected int courseId { get; set; }
+        protected string courseName { get; set; }
+        protected DateTime schedule { get; set; } 
         protected int fees { get; set; }
 
-        public Course() { }
+        public AddCourse() { }
     }
 }
