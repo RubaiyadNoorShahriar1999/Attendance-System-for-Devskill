@@ -6,14 +6,18 @@ using System.Threading.Tasks;
 
 namespace AttendanceSystem
 {
-    public class Teacher : User
+    public class Teacher
     {
-        private string Name { get; set; }
-        private string UserName { get; set; }
-        private string Password { get; set; }
+        protected int Id { get; set; }
+        private string name { get; set; }
+        private string userName { get; set; }
+        private string password { get; set; }
+        private DateTime schedule { get; set; }
+        private int noOfClasses { get; set; }
 
-        private DateTime schedule;
+        public Teacher(string name, string userName, string password) 
+        { 
 
-        public Teacher() { }
+        }
     }
 }
