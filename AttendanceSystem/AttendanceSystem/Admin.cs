@@ -43,8 +43,6 @@ namespace AttendanceSystem
             course.ClassStartDate = DateTime.Parse(Console.ReadLine());
             system.Add(course);
             system.SaveChanges();
-
-
         }
         public void AddCourseToTeacher()
         {
