@@ -22,7 +22,7 @@ namespace AttendanceSystem.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("AttendanceSystem.Admin", b =>
+            modelBuilder.Entity("AttendanceSystem.Models.Admin", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -47,7 +47,7 @@ namespace AttendanceSystem.Migrations
                     b.ToTable("Admins");
                 });
 
-            modelBuilder.Entity("AttendanceSystem.Course", b =>
+            modelBuilder.Entity("AttendanceSystem.Models.Course", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -58,18 +58,18 @@ namespace AttendanceSystem.Migrations
                     b.Property<DateTime>("ClassStartDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("classTime")
+                    b.Property<string>("ClassTime")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("courseName")
+                    b.Property<string>("CourseName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<double>("fees")
+                    b.Property<double>("Fees")
                         .HasColumnType("float");
 
-                    b.Property<int>("noOfClasses")
+                    b.Property<int>("NoOfClasses")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
