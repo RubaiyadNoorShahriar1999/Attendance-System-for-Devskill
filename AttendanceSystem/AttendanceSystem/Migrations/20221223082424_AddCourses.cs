@@ -17,7 +17,9 @@ namespace AttendanceSystem.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     courseName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     fees = table.Column<double>(type: "float", nullable: false),
-                    ClassStartDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    ClassStartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    classTime = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    noOfClasses = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {

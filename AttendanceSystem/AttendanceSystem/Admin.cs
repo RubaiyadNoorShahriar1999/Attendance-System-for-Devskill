@@ -9,26 +9,36 @@ namespace AttendanceSystem
 {
     public class Admin : AddCourse 
     {
-        protected int Id { get; set; }
-        private string name { get; set; }
-        private string userName { get; set; }
-        private string password { get; set; }
+        public int Id { get; set; }
+        protected string name { get; set; }
+        protected string userName { get; set; }
+        protected string password { get; set; }
 
-        public Admin(string name, string userName, string password)
+        public Admin()
         {
-            this.name = name;
-            this.userName = userName;
-            this.password = password;
+            AttendanceSystemDbContext system = new AttendanceSystemDbContext();
+            Admin admin = new Admin();
+            admin.name = "Rubaiyad";
+            admin.userName = "rubaiyad007";
+            admin.password = "asd@123";
+            system.Add(admin);
+            system.SaveChanges();
 
-            Console.WriteLine("Menu:\n 1. Assign Course to a Teacher\n 2. Assign Course to a Student\n 3. Set class schedule for a course");
-            int choice = Convert.ToInt32(Console.ReadLine());
+            Admin a1 = system.Admins.Where(x => x.userName == userName).FirstOrDefault();
+            if(a1 != null)
+            {
+                Console.WriteLine("Menu:\n 1. Assign Course to a Teacher\n 2. Assign Course to a Student\n 3. Set class schedule for a course");
+                int choice = Convert.ToInt32(Console.ReadLine());
 
-            if (choice == 1)
-                AddCourseToTeacher();
-            else if (choice == 2)
-                AddCourseToStudent();
-            else if (choice == 3)
-                AddCourse();
+                if (choice == 1)
+                    AddCourseToTeacher();
+                else if (choice == 2)
+                    AddCourseToStudent();
+                else if (choice == 3)
+                    AddCourse();
+            }
+
+
         }
 
         public void AddCourse()
@@ -39,8 +49,12 @@ namespace AttendanceSystem
             course.courseName = Console.ReadLine();
             Console.Write("Enter Course Fee: ");
             course.fees = double.Parse(Console.ReadLine());
-            Console.WriteLine("Enter class date: ");
+            Console.Write("Enter class date: ");
             course.ClassStartDate = DateTime.Parse(Console.ReadLine());
+            Console.Write("Enter class time (ex. Monday 8PM-11PM,Thursday 8PM-11PM): ");
+            course.classTime = Console.ReadLine().Replace(@"\s","");
+            Console.Write("Enter number of classes: ");
+            course.noOfClasses = int.Parse(Console.ReadLine());
             system.Add(course);
             system.SaveChanges();
         }

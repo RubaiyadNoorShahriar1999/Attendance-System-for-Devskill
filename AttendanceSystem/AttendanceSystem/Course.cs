@@ -12,6 +12,8 @@ namespace AttendanceSystem
         public string courseName { get; set; }
         public double fees { get; set; }
         public DateTime ClassStartDate { get; set; }
+        public string classTime { get; set; }
+        public int noOfClasses { get; set; }
     }
 }
     

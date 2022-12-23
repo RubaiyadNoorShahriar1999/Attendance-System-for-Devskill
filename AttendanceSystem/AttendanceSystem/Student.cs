@@ -15,7 +15,7 @@ namespace AttendanceSystem
         private DateTime schedule { get; set; }
         private int noOfClasses { get; set; }
 
-        public Student(string name, string userName, string password) 
+        public Student() 
         {
 
         }

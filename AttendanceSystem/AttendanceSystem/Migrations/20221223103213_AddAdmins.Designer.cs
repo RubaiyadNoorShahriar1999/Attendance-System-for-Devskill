@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AttendanceSystem.Migrations
 {
     [DbContext(typeof(AttendanceSystemDbContext))]
-    [Migration("20221223062216_AddCourses")]
-    partial class AddCourses
+    [Migration("20221223103213_AddAdmins")]
+    partial class AddAdmins
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,6 +23,19 @@ namespace AttendanceSystem.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
+
+            modelBuilder.Entity("AttendanceSystem.Admin", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Admins", (string)null);
+                });
 
             modelBuilder.Entity("AttendanceSystem.Course", b =>
                 {
@@ -35,12 +48,19 @@ namespace AttendanceSystem.Migrations
                     b.Property<DateTime>("ClassStartDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("classTime")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("courseName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<double>("fees")
                         .HasColumnType("float");
+
+                    b.Property<int>("noOfClasses")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
