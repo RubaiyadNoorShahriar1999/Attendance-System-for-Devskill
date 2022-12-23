@@ -7,27 +7,32 @@ using System.Xml.Serialization;
 
 namespace AttendanceSystem
 {
-    public class Admin : AddCourse 
+    public class Admin : AddCourse
     {
         public int Id { get; set; }
-        protected string name { get; set; }
-        protected string userName { get; set; }
-        protected string password { get; set; }
+        public string Name { get; set; }
+        public string UserName { get; set; }
+        public string Password { get; set; }
 
         public Admin()
         {
-            AttendanceSystemDbContext system = new AttendanceSystemDbContext();
+/*            AttendanceSystemDbContext system = new AttendanceSystemDbContext();
             Admin admin = new Admin();
-            admin.name = "Rubaiyad";
-            admin.userName = "rubaiyad007";
-            admin.password = "asd@123";
-            system.Add(admin);
-            system.SaveChanges();
 
-            Admin a1 = system.Admins.Where(x => x.userName == userName).FirstOrDefault();
-            if(a1 != null)
+            Console.Write("Enter Admin name: ");
+            admin.name = Console.ReadLine();
+            Console.WriteLine("Enter user name: ");
+            admin.userName = Console.ReadLine();
+            Console.WriteLine("Enter password: ");
+            admin.password = Console.ReadLine();
+            system.Add(admin);
+            system.SaveChanges();*/
+
+    /*            Admin a1 = system.Admins.Where(x => x.userName == userName).FirstOrDefault();
+            if (a1 != null)
             {
-                Console.WriteLine("Menu:\n 1. Assign Course to a Teacher\n 2. Assign Course to a Student\n 3. Set class schedule for a course");
+            }*/
+            Console.WriteLine("Menu:\n 1. Assign Course to a Teacher\n 2. Assign Course to a Student\n 3. Set class schedule for a course");
                 int choice = Convert.ToInt32(Console.ReadLine());
 
                 if (choice == 1)
@@ -36,9 +41,6 @@ namespace AttendanceSystem
                     AddCourseToStudent();
                 else if (choice == 3)
                     AddCourse();
-            }
-
-
         }
 
         public void AddCourse()
@@ -60,21 +62,21 @@ namespace AttendanceSystem
         }
         public void AddCourseToTeacher()
         {
-            int courseID,fees;
+/*            int courseID,fees;
             string courseName;
             DateTime schedule;
             courseName = Console.ReadLine();
             courseID = Convert.ToInt32(Console.ReadLine());
-            schedule = DateTime.Parse(Console.ReadLine());
+            schedule = DateTime.Parse(Console.ReadLine());*/
         }
         public void AddCourseToStudent()
         {
-            int courseID, fees;
+/*            int courseID, fees;
             string courseName;
             DateTime schedule;
             courseName = Console.ReadLine();
             courseID = Convert.ToInt32(Console.ReadLine());
-            schedule = DateTime.Parse(Console.ReadLine());
+            schedule = DateTime.Parse(Console.ReadLine());*/
         }
 
 

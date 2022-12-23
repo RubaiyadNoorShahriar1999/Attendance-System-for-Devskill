@@ -25,18 +25,18 @@ namespace AttendanceSystem
             {
                 optionsBuilder.UseSqlServer(_connectionString, (x) => x.MigrationsAssembly(_migrationAssembly));
             }
-
             base.OnConfiguring(optionsBuilder);
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Admin>().ToTable("Admins");
+            /*modelBuilder.Entity<Admin>().ToTable("Admins");*/
             base.OnModelCreating(modelBuilder);
         }
-        public DbSet<Course> Courses { get; set; }
 
+        public DbSet<Course> Courses { get; set; }
         public DbSet<Admin> Admins { get; set; }
+
 /*        public DbSet<Teacher> Teachers { get; set; }
         public DbSet<Student> Students { get; set; }*/
 
