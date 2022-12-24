@@ -15,4 +15,7 @@ dotnet tool install --global dotnet-ef --version 3.1.0
 dotnet ef migrations add AddCourses --project AttendanceSystem --context AttendanceSystemDbContext
 dotnet ef database update --project AttendanceSystem --context AttendanceSystemDbContext
 
+#removing migrations:
+dotnet ef migrations remove --project AttendanceSystem --context AttendanceSystemDbContext
+
 
