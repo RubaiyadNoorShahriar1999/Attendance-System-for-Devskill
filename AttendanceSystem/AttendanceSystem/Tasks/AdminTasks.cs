@@ -32,13 +32,15 @@ namespace AttendanceSystem.Tasks
 
         public bool AddCourse(Course course)
         {
-            return new CourseTasks().Create(course);
+            /*return new CourseTasks().Create(course);*/
+            throw new NotImplementedException();
         }
 
         public bool AssignTeacher(Student student, Teacher teacher)
         {
-            student.TeacherId = teacher.Id;
-            return new StudentTasks().Create(student);
+            /*student.TeacherId = teacher.Id;
+            return new StudentTasks().Create(student);*/
+            throw new NotImplementedException();
         }
     }
 }

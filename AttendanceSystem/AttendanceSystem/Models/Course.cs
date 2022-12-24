@@ -14,5 +14,11 @@ namespace AttendanceSystem.Models
         public DateTime ClassStartDate { get; set; }
         public string ClassTime { get; set; }
         public int NoOfClasses { get; set; }
+        public int AdminId { get; set; }
+        public int TeacherId { get; set; }
+        public Admin Admin { get; set; }
+        public Teacher Teacher { get; set; }
+        public List<CourseStudent> CourseStudents { get; set; }
+        public List<Attendance> Attendances { get; set; }
     }
 }

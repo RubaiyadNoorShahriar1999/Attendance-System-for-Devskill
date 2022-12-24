@@ -14,5 +14,9 @@ namespace AttendanceSystem.Models
         public string Password { get; set; }
         public DateTime Schedule { get; set; }
         public int NoOfClasses { get; set; }
+        public int AdminId { get; set; }
+        public Admin Admin { get; set; }
+        public List<Course> Courses { get; set; }
+        public List<Student> Students { get; set; }
     }
 }
