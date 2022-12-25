@@ -43,6 +43,7 @@ namespace AttendanceSystem
                         .ToTable("CourseStudents");
 
             #region Admin Relation
+
             modelBuilder.Entity<Admin>()
                 .HasMany(x => x.Courses)
                 .WithOne(y => y.Admin)
@@ -60,6 +61,11 @@ namespace AttendanceSystem
                 .WithOne(y => y.Admin)
                 .HasForeignKey(z => z.AdminId)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Admin>().HasData(new Admin[] {
+                new Admin{Id = 1, UserName = "rubaiyad007", Name = "Rubaiyad Noor", Password = "asd@123"},
+            });
+
             #endregion
 
             #region Teacher Relation
@@ -68,13 +74,44 @@ namespace AttendanceSystem
                 .HasMany(x => x.Students)
                 .WithOne(y => y.Teacher)
                 .HasForeignKey(z => z.TeacherId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder.Entity<Teacher>()
                 .HasMany(x => x.Courses)
                 .WithOne(y => y.Teacher)
                 .HasForeignKey(z => z.TeacherId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<Teacher>()
+                .HasOne(x => x.Admin)
+                .WithMany(y => y.Teachers)
+                .HasForeignKey(z => z.AdminId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            /*            modelBuilder.Entity<Teacher>().HasData(new Teacher[] {
+                            new Teacher{Id =1,UserName = "jalal007", Name = "jalal", Password = "asd@123", Schedule ="Monday 8PM-11PM,Thursday 8PM-11PM", NoOfClasses = 20,AdminId = 1},
+                        });*/
+
+            #endregion
+
+            #region Student relations
+            modelBuilder.Entity<Student>()
+                .HasOne(x => x.Admin)
+                .WithMany(y => y.Students)
+                .HasForeignKey(z => z.AdminId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<Student>()
+                .HasOne(x => x.Teacher)
+                .WithMany(y => y.Students)
+                .HasForeignKey(z => z.TeacherId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<Student>()
+                .HasMany(x => x.Attendances).WithOne(y => y.Student).HasForeignKey(z => z.StudentId).OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<Student>()
+                .HasMany(x => x.StudentCourses).WithOne(y => y.Student).HasForeignKey(z => z.StudentId).OnDelete(DeleteBehavior.NoAction);
 
             #endregion
 

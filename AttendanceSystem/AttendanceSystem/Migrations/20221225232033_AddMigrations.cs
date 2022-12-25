@@ -33,7 +33,7 @@ namespace AttendanceSystem.Migrations
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Schedule = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Schedule = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     NoOfClasses = table.Column<int>(type: "int", nullable: false),
                     AdminId = table.Column<int>(type: "int", nullable: false)
                 },
@@ -74,8 +74,7 @@ namespace AttendanceSystem.Migrations
                         name: "FK_Courses_Teachers_TeacherId",
                         column: x => x.TeacherId,
                         principalTable: "Teachers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -87,7 +86,7 @@ namespace AttendanceSystem.Migrations
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Schedule = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Schedule = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     NoOfClasses = table.Column<int>(type: "int", nullable: false),
                     AdminId = table.Column<int>(type: "int", nullable: false),
                     TeacherId = table.Column<int>(type: "int", nullable: false)
@@ -99,14 +98,12 @@ namespace AttendanceSystem.Migrations
                         name: "FK_Students_Admins_AdminId",
                         column: x => x.AdminId,
                         principalTable: "Admins",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Students_Teachers_TeacherId",
                         column: x => x.TeacherId,
                         principalTable: "Teachers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -154,6 +151,11 @@ namespace AttendanceSystem.Migrations
                         principalTable: "Students",
                         principalColumn: "Id");
                 });
+
+            migrationBuilder.InsertData(
+                table: "Admins",
+                columns: new[] { "Id", "Name", "Password", "UserName" },
+                values: new object[] { 1, "Rubaiyad Noor", "asd@123", "rubaiyad007" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Attendances_StudentId",
