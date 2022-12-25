@@ -1,5 +1,6 @@
 ﻿using AttendanceSystem.Interfaces;
 using AttendanceSystem.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,7 +31,12 @@ namespace AttendanceSystem.Tasks
 
         public bool Delete(int id)
         {
-            throw new NotImplementedException();
+            AttendanceSystemDbContext attendanceSystemDbContext= new AttendanceSystemDbContext();
+            Course course = attendanceSystemDbContext.Courses.Where(x => x.Id == id).FirstOrDefault();
+            attendanceSystemDbContext.Courses.Remove(course);
+            attendanceSystemDbContext.SaveChanges();
+            return true;
+
         }
 
         public List<Course> Read()
@@ -40,7 +46,10 @@ namespace AttendanceSystem.Tasks
 
         public bool Update(Course type)
         {
-            throw new NotImplementedException();
+            AttendanceSystemDbContext attendanceSystemDbContext = new AttendanceSystemDbContext();
+            Course course = attendanceSystemDbContext.Courses.Where(x => x.Id == type.TeacherId).FirstOrDefault();
+            course.TeacherId = type.TeacherId;
+            return attendanceSystemDbContext.SaveChanges() > 0;
         }
     }
 }
