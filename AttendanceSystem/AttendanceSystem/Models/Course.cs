@@ -21,7 +21,7 @@ namespace AttendanceSystem.Models
         public List<Attendance> Attendances { get; set; }
 
         [ForeignKey("AdminId")]
-        public int? AdminId { get; set; }
+        public int AdminId { get; set; }
 
         [ForeignKey("TeacherId")]
         public int? TeacherId { get; set; }

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,7 +25,7 @@ namespace AttendanceSystem.Models
 
         [ForeignKey("TeacherId")]
         public int? TeacherId { get; set; }
-        public virtual Teacher Teacher { get; set; }
+        public Teacher Teacher { get; set; }
         public List<CourseStudent> StudentCourses { get; set; }
         public List<Attendance> Attendances { get; set; }
     }

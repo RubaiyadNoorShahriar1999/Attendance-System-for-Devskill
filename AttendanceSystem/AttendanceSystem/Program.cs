@@ -12,27 +12,31 @@ string userName = Console.ReadLine();
 Console.Write("Enter Password: ");
 string password = Console.ReadLine();
 
-
-if (userName != string.Empty && password != string.Empty)
+int count = 100;
+while(count > 0)
 {
-    if (choice == 1)
+    if (userName != string.Empty && password != string.Empty)
     {
-        Admin a1 = ad.Admins.Where(x => x.UserName == userName && x.Password == password).FirstOrDefault();
-        if (a1 != null)
-            AdminPage.AdminOption(a1);
+        if (choice == 1)
+        {
+            Admin a1 = ad.Admins.Where(x => x.UserName == userName && x.Password == password).FirstOrDefault();
+            if (a1 != null)
+                AdminPage.AdminOption(a1);
+        }
+        else if (choice == 2)
+        {
+            Teacher t1 = ad.Teachers.Where(x => x.UserName == userName && x.Password == password).FirstOrDefault();
+            if (t1 != null)
+                new TeacherServices();
+        }
+        else if (choice == 3)
+        {
+            Student s1 = ad.Students.Where(x => x.UserName == userName && x.Password == password).FirstOrDefault();
+            if (s1 != null)
+                new StudentServices();
+        }
+        else
+            Console.WriteLine("Invalid Input");
     }
-    else if (choice == 2)
-    {
-        Teacher t1 = ad.Teachers.Where(x => x.UserName == userName && x.Password == password).FirstOrDefault();
-        if (t1 != null)
-            new TeacherServices();
-    }
-    else if (choice == 3)
-    {
-        Student s1 = ad.Students.Where(x => x.UserName == userName && x.Password == password).FirstOrDefault();
-        if (s1 != null)
-            new StudentServices();
-    }
-    else
-        Console.WriteLine("Invalid Input");
 }
+

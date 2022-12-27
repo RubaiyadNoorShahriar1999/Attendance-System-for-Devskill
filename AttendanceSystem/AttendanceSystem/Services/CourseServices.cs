@@ -14,24 +14,30 @@ namespace AttendanceSystem.Tasks
     private static readonly AttendanceSystemDbContext db = new AttendanceSystemDbContext();
         public Course Create(Course course/*, int? foreignKey1, int? foreignKey2*/)
         {
-            throw new NotImplementedException();
+            Course entity = db.Courses.Add(course).Entity;
+            db.SaveChanges();
+            return entity;
         }
 
         public bool Delete(int id)
-        {
-            /*AttendanceSystemDbContext attendanceSystemDbContext= new AttendanceSystemDbContext();
-            Course course = attendanceSystemDbContext.Courses.Where(x => x.Id == id).FirstOrDefault();
-            attendanceSystemDbContext.Courses.Remove(course);
-            attendanceSystemDbContext.SaveChanges();
-            return true;*/
-
-            throw new NotImplementedException();
-
+        { 
+            Course course = db.Courses.Where(x => x.Id == id).FirstOrDefault();
+            if(course != null )
+            {
+                db.Courses.Remove(course);
+                db.SaveChanges();
+                return true;
+            }
+            else
+            {
+                Console.WriteLine("Course does not exist");
+                return false;
+            }
         }
 
         public Course Get(int id)
         {
-            throw new NotImplementedException();
+           return db.Courses.Find(id);
         }
 
         public List<Course> Read()

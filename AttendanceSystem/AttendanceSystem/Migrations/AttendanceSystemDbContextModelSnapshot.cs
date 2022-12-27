@@ -86,8 +86,7 @@ namespace AttendanceSystem.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int?>("AdminId")
-                        .IsRequired()
+                    b.Property<int>("AdminId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("ClassStartDate")
@@ -239,13 +238,13 @@ namespace AttendanceSystem.Migrations
                     b.HasOne("AttendanceSystem.Models.Admin", "Admin")
                         .WithMany("Courses")
                         .HasForeignKey("AdminId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("AttendanceSystem.Models.Teacher", "Teacher")
                         .WithMany("Courses")
                         .HasForeignKey("TeacherId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.SetNull)
                         .IsRequired();
 
                     b.Navigation("Admin");
@@ -283,7 +282,7 @@ namespace AttendanceSystem.Migrations
                     b.HasOne("AttendanceSystem.Models.Teacher", "Teacher")
                         .WithMany("Students")
                         .HasForeignKey("TeacherId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.SetNull)
                         .IsRequired();
 
                     b.Navigation("Admin");

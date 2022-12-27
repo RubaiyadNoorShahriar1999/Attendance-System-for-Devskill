@@ -2,6 +2,7 @@
 using AttendanceSystem.Models;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,13 +21,13 @@ namespace AttendanceSystem.Tasks
         }
         public bool Delete(int id)
         {
-            /*AttendanceSystemDbContext attendanceSystemDbContext = new AttendanceSystemDbContext();
-            Teacher teacher = attendanceSystemDbContext.Teachers.Where(t => t.Id == id).FirstOrDefault();
-            attendanceSystemDbContext.Teachers.Remove(teacher);
-            attendanceSystemDbContext.SaveChanges();
-            return true;*/
+            Teacher teacher = db.Teachers.Where(t => t.Id == id).FirstOrDefault();
 
-            throw new NotImplementedException();
+            if(teacher == null) return false;
+
+            db.Teachers.Remove(teacher);
+
+            return db.SaveChanges() > 0;
         }
 
         public Teacher Get(int id)
@@ -36,7 +37,7 @@ namespace AttendanceSystem.Tasks
 
         public List<Teacher> Read()
         {
-            throw new NotImplementedException();
+            return db.Teachers.ToList();
         }
 
         public bool Update(Teacher type)

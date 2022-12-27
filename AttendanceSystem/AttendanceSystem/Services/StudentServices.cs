@@ -3,6 +3,8 @@ using AttendanceSystem.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.PortableExecutable;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -22,18 +24,23 @@ namespace AttendanceSystem.Tasks
 
         public bool Delete(int id)
         {
-            /*AttendanceSystemDbContext attendanceSystemDbContext = new AttendanceSystemDbContext();
-            Student student = attendanceSystemDbContext.Students.Where(x => x.Id == id).FirstOrDefault();
-            attendanceSystemDbContext.Students.Remove(student);
-            attendanceSystemDbContext.SaveChanges();
-            return true;*/
-
-            throw new NotImplementedException();
+            Student? student = db.Students.Where(x => x.Id == id).FirstOrDefault();
+            if (student != null)
+            {
+                db.Students.Remove(student);
+                db.SaveChanges();
+                return true;
+            }
+            else
+            {
+                Console.WriteLine("Student does not exist");
+                return false;
+            }
         }
 
         public Student Get(int id)
         {
-            throw new NotImplementedException();
+            return db.Students.Find(id);
         }
 
         public List<Student> Read()
@@ -43,7 +50,21 @@ namespace AttendanceSystem.Tasks
 
         public bool Update(Student type)
         {
-            throw new NotImplementedException();
+            var student = db.Students.Where(s => s.Id == type.Id).SingleOrDefault();
+
+            if (student == null)
+            {
+                return false;
+            }
+
+            db.Entry(student).CurrentValues.SetValues(type);
+
+            return db.SaveChanges() > 0;
+        }
+
+        public List<Student> GetStudentByTeacherId(int id)
+        {
+            return db.Students.Where(s => s.TeacherId == id).ToList();
         }
     }
 }

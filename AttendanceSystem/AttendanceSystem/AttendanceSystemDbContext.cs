@@ -48,7 +48,7 @@ namespace AttendanceSystem
                 .HasMany(x => x.Courses)
                 .WithOne(y => y.Admin)
                 .HasForeignKey(z => z.AdminId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder.Entity<Admin>()
                 .HasMany(x => x.Teachers)
@@ -60,7 +60,7 @@ namespace AttendanceSystem
                 .HasMany(x => x.Students)
                 .WithOne(y => y.Admin)
                 .HasForeignKey(z => z.AdminId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder.Entity<Admin>().HasData(new Admin[] {
                 new Admin{Id = 1, UserName = "rubaiyad007", Name = "Rubaiyad Noor", Password = "asd@123"},
@@ -74,13 +74,21 @@ namespace AttendanceSystem
                 .HasMany(x => x.Students)
                 .WithOne(y => y.Teacher)
                 .HasForeignKey(z => z.TeacherId)
-                .OnDelete(DeleteBehavior.NoAction);
+                .OnDelete(DeleteBehavior.SetNull);
 
             modelBuilder.Entity<Teacher>()
                 .HasMany(x => x.Courses)
                 .WithOne(y => y.Teacher)
                 .HasForeignKey(z => z.TeacherId)
-                .OnDelete(DeleteBehavior.NoAction);
+                .OnDelete(DeleteBehavior.SetNull);
+
+/*            #region extra portion Course Teacher reverse
+            modelBuilder.Entity<Course>()
+                .HasOne(x => x.Teacher)
+                .WithMany(y => y.Courses)
+                .HasForeignKey(z => z.TeacherId)
+                .OnDelete(DeleteBehavior.SetNull);
+            #endregion*/
 
             modelBuilder.Entity<Teacher>()
                 .HasOne(x => x.Admin)
@@ -105,7 +113,7 @@ namespace AttendanceSystem
                 .HasOne(x => x.Teacher)
                 .WithMany(y => y.Students)
                 .HasForeignKey(z => z.TeacherId)
-                .OnDelete(DeleteBehavior.NoAction);
+                .OnDelete(DeleteBehavior.SetNull);
 
             modelBuilder.Entity<Student>()
                 .HasMany(x => x.Attendances).WithOne(y => y.Student).HasForeignKey(z => z.StudentId).OnDelete(DeleteBehavior.NoAction);
@@ -161,5 +169,6 @@ namespace AttendanceSystem
         public DbSet<Teacher> Teachers { get; set; }
         public DbSet<Student> Students { get; set; }
         public DbSet<Attendance> Attendances { get; set; }
+        public DbSet<CourseStudent> CourseStudents { get; set; }
     }
 }
