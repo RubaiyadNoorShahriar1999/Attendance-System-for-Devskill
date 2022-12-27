@@ -27,7 +27,7 @@ while(count > 0)
         {
             Teacher t1 = ad.Teachers.Where(x => x.UserName == userName && x.Password == password).FirstOrDefault();
             if (t1 != null)
-                new TeacherServices();
+                TeacherPage.TeacherOption(t1);
         }
         else if (choice == 3)
         {

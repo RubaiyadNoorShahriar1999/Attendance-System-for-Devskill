@@ -12,7 +12,7 @@ namespace AttendanceSystem
     {
         public static void StudentOption(Student student)
         {
-            Console.WriteLine("Wellcome to your Student Portal " + student.UserName);
+            Console.WriteLine("Wellcome to your Student Portal " + student.Name);
             Console.WriteLine("Tasks:\n1. Give your Attendance\n2. View your attendance sheet");
             int choice = int.Parse(Console.ReadLine());
 

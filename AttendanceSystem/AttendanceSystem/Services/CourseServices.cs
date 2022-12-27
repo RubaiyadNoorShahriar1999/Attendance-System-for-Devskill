@@ -12,7 +12,7 @@ namespace AttendanceSystem.Tasks
     public class CourseServices : IBasicAction<Course>
     {
     private static readonly AttendanceSystemDbContext db = new AttendanceSystemDbContext();
-        public Course Create(Course course/*, int? foreignKey1, int? foreignKey2*/)
+        public Course Create(Course course)
         {
             Course entity = db.Courses.Add(course).Entity;
             db.SaveChanges();
@@ -47,11 +47,6 @@ namespace AttendanceSystem.Tasks
 
         public bool Update(Course type)
         {
-            /*AttendanceSystemDbContext attendanceSystemDbContext = new AttendanceSystemDbContext();
-            Course course = attendanceSystemDbContext.Courses.Where(x => x.Id == type.TeacherId).FirstOrDefault();
-            course.TeacherId = type.TeacherId;
-            return attendanceSystemDbContext.SaveChanges() > 0;*/
-
             throw new NotImplementedException();
         }
     }
