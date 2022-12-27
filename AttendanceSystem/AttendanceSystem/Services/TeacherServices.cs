@@ -31,14 +31,18 @@ namespace AttendanceSystem.Tasks
 
         public bool ShowAttendanceOfAStudents(Attendance attendance)
         {
-            Attendance attendances = db.Attendances.Where( x => x.StudentId == attendance.StudentId).FirstOrDefault();
+            Attendance attendances = db.Attendances.Where(x => x.StudentId == attendance.StudentId).Where(y => y.CourseId == attendance.CourseId).FirstOrDefault();
             Course course = db.Courses.Where(x => x.Id == attendance.CourseId).FirstOrDefault();
             Student student = db.Students.Where(x => x.Id == attendance.StudentId).FirstOrDefault();
         
             Console.Write("Student Name: "+ student.Name + " Course Name: "+ course.CourseName);
-            if (attendances.Present == " Present")
+            if (attendances.Present.ToLower() == "present")
             {
-                Console.WriteLine(" Present: " + ((char)0x221A).ToString());
+                Console.WriteLine(" Present: " + ((char)0x221A).ToString()+"\n");
+            }
+            else
+            {
+                Console.WriteLine(" Present: x\n");
             }
             
             return true;
@@ -51,9 +55,13 @@ namespace AttendanceSystem.Tasks
             foreach (Attendance a in attendances)
             {
                 Console.Write("Student Name: " + student.Name + " Course Name: " + course.CourseName);
-                if (a.Present == "Present")
+                if (a.Present.ToLower() == "present")
                 {
                     Console.WriteLine(" Present: " + ((char)0x221A).ToString());
+                }
+                else
+                {
+                    Console.WriteLine(" Present: x\n");
                 }
             }
             return true;

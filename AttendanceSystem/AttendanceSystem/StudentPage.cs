@@ -26,7 +26,7 @@ namespace AttendanceSystem
                 st.Id= int.Parse(Console.ReadLine());
                 Console.Write("Enter the Course ID you want to give attendance: ");
                 c.Id = int.Parse(Console.ReadLine());
-                Console.Write("Write Present: ");
+                Console.Write("Write Present (Caution: Anything other then \"Present\" may result in \"Not Presesnt\"): ");
                 at.Present = Console.ReadLine();
                 at.Time = DateTime.Now;
                 bool entity = new StudentServices().GiveAttendance(st, c, at);
