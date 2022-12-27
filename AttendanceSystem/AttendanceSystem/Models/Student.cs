@@ -16,8 +16,8 @@ namespace AttendanceSystem.Models
         public string Name { get; set; }
         public string UserName { get; set; }
         public string Password { get; set; }
-        public string Schedule { get; set; }
-        public int NoOfClasses { get; set; }
+/*        public string Schedule { get; set; }*/
+/*        public int NoOfClasses { get; set; }*/
 
         [ForeignKey("AdminId")]
         public int AdminId { get; set; }
@@ -28,5 +28,6 @@ namespace AttendanceSystem.Models
         public Teacher Teacher { get; set; }
         public List<CourseStudent> StudentCourses { get; set; }
         public List<Attendance> Attendances { get; set; }
+        public List<Schedule> Schedules { get; set; }
     }
 }

@@ -12,9 +12,8 @@ namespace AttendanceSystem.Tasks
     public class TeacherServices : IBasicAction<Teacher>
     {
         private static readonly AttendanceSystemDbContext db = new AttendanceSystemDbContext();
-        public Teacher Create(Teacher teacher/*, int? foreignKey1, int? foreignKey2*/)
+        public Teacher Create(Teacher teacher)
         {
-/*            teacher.AdminId = foreignKey1;*/
             Teacher entity = db.Teachers.Add(teacher).Entity;
             db.SaveChanges();
             return entity;

@@ -33,7 +33,7 @@ while(count > 0)
         {
             Student s1 = ad.Students.Where(x => x.UserName == userName && x.Password == password).FirstOrDefault();
             if (s1 != null)
-                new StudentServices();
+                StudentPage.StudentOption(s1);
         }
         else
             Console.WriteLine("Invalid Input");

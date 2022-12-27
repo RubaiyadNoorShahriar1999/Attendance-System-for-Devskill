@@ -36,6 +36,13 @@ namespace AttendanceSystem.Tasks
             throw new NotImplementedException();
         }
 
+        public Schedule AssignClassSchedule(Schedule schedule)
+        {
+            Schedule entity = db.Schedules.Add(schedule).Entity;
+            db.SaveChanges();
+            return entity;
+        }
+
 /*        public bool AssignCourseToStudent(Course course, Student student)
         {
             course.CourseStudents.Add(new CourseStudent

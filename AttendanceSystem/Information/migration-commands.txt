@@ -19,7 +19,7 @@ dotnet ef database update --project AttendanceSystem --context AttendanceSystemD
 dotnet ef migrations remove --project AttendanceSystem --context AttendanceSystemDbContext
 
 1
-rubaiyad007
+rubaiyad
 asd@123
 
 

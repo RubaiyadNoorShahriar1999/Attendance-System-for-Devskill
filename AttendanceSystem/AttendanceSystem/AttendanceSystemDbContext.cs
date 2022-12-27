@@ -41,8 +41,12 @@ namespace AttendanceSystem
                         .ToTable("Students");
             modelBuilder.Entity<CourseStudent>()
                         .ToTable("CourseStudents");
-
-            #region Admin Relation
+            modelBuilder.Entity<Attendance>()
+                        .ToTable("Attendances");
+            modelBuilder.Entity<Schedule>()
+                        .ToTable("Schedules");
+                
+            #region Admin Relations
 
             modelBuilder.Entity<Admin>()
                 .HasMany(x => x.Courses)
@@ -63,7 +67,7 @@ namespace AttendanceSystem
                 .OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder.Entity<Admin>().HasData(new Admin[] {
-                new Admin{Id = 1, UserName = "rubaiyad007", Name = "Rubaiyad Noor", Password = "asd@123"},
+                new Admin{Id = 1, UserName = "rubaiyad", Name = "Rubaiyad Noor Shahriar", Password = "asd@123"},
             });
 
             #endregion
@@ -102,7 +106,7 @@ namespace AttendanceSystem
 
             #endregion
 
-            #region Student relations
+            #region Student Relations
             modelBuilder.Entity<Student>()
                 .HasOne(x => x.Admin)
                 .WithMany(y => y.Students)
@@ -123,7 +127,7 @@ namespace AttendanceSystem
 
             #endregion
 
-            #region Course and Student Relation
+            #region Course and Student Relations
 
             modelBuilder.Entity<CourseStudent>()
                         .HasKey((x) => new { x.CourseId, x.StudentId });
@@ -142,7 +146,7 @@ namespace AttendanceSystem
 
             #endregion
 
-            #region Course and Student Relation Attendance
+            #region Course and Student Relations with Attendance
 
             modelBuilder.Entity<Attendance>()
                         .HasKey((x) => new { x.CourseId, x.StudentId });
@@ -161,14 +165,40 @@ namespace AttendanceSystem
 
             #endregion
 
+            #region Schedule Relations
+
+            modelBuilder.Entity<Schedule>()
+            .HasKey((x) => new { x.CourseId, x.TeacherId,x.StudentId });
+
+            modelBuilder.Entity<Schedule>()
+                        .HasOne(x => x.Course)
+                        .WithMany(y => y.Schedules)
+                        .HasForeignKey(z => z.CourseId)
+                        .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<Schedule>()
+                        .HasOne(x => x.Teacher)
+                        .WithMany(y => y.Schedules)
+                        .HasForeignKey(z => z.TeacherId)
+                        .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<Schedule>()
+                        .HasOne(x => x.Student)
+                        .WithMany(y => y.Schedules)
+                        .HasForeignKey(z => z.StudentId)
+                        .OnDelete(DeleteBehavior.NoAction);
+            #endregion
+
             base.OnModelCreating(modelBuilder);
         }
-
+        #region Tables
         public DbSet<Course> Courses { get; set; }
         public DbSet<Admin> Admins { get; set; }
         public DbSet<Teacher> Teachers { get; set; }
         public DbSet<Student> Students { get; set; }
         public DbSet<Attendance> Attendances { get; set; }
         public DbSet<CourseStudent> CourseStudents { get; set; }
+        public DbSet<Schedule> Schedules { get; set; }
+        #endregion
     }
 }

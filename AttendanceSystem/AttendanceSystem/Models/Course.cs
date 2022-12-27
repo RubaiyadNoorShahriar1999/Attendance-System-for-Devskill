@@ -19,6 +19,7 @@ namespace AttendanceSystem.Models
         public Teacher Teacher { get; set; }
         public List<CourseStudent> CourseStudents { get; set; }
         public List<Attendance> Attendances { get; set; }
+        public List<Schedule> Schedules { get; set; }
 
         [ForeignKey("AdminId")]
         public int AdminId { get; set; }

@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AttendanceSystem.Migrations
 {
     [DbContext(typeof(AttendanceSystemDbContext))]
-    [Migration("20221226225818_AddMigrations")]
+    [Migration("20221227164122_AddMigrations")]
     partial class AddMigrations
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -52,9 +52,9 @@ namespace AttendanceSystem.Migrations
                         new
                         {
                             Id = 1,
-                            Name = "Rubaiyad Noor",
+                            Name = "Rubaiyad Noor Shahriar",
                             Password = "asd@123",
-                            UserName = "rubaiyad007"
+                            UserName = "rubaiyad"
                         });
                 });
 
@@ -77,7 +77,7 @@ namespace AttendanceSystem.Migrations
 
                     b.HasIndex("StudentId");
 
-                    b.ToTable("Attendances");
+                    b.ToTable("Attendances", (string)null);
                 });
 
             modelBuilder.Entity("AttendanceSystem.Models.Course", b =>
@@ -136,6 +136,33 @@ namespace AttendanceSystem.Migrations
                     b.ToTable("CourseStudents", (string)null);
                 });
 
+            modelBuilder.Entity("AttendanceSystem.Models.Schedule", b =>
+                {
+                    b.Property<int>("CourseId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TeacherId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("StudentId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ClassTime")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("NoOfClasses")
+                        .HasColumnType("int");
+
+                    b.HasKey("CourseId", "TeacherId", "StudentId");
+
+                    b.HasIndex("StudentId");
+
+                    b.HasIndex("TeacherId");
+
+                    b.ToTable("Schedules", (string)null);
+                });
+
             modelBuilder.Entity("AttendanceSystem.Models.Student", b =>
                 {
                     b.Property<int>("Id")
@@ -151,14 +178,7 @@ namespace AttendanceSystem.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("NoOfClasses")
-                        .HasColumnType("int");
-
                     b.Property<string>("Password")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Schedule")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -194,14 +214,7 @@ namespace AttendanceSystem.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("NoOfClasses")
-                        .HasColumnType("int");
-
                     b.Property<string>("Password")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Schedule")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -273,6 +286,33 @@ namespace AttendanceSystem.Migrations
                     b.Navigation("Student");
                 });
 
+            modelBuilder.Entity("AttendanceSystem.Models.Schedule", b =>
+                {
+                    b.HasOne("AttendanceSystem.Models.Course", "Course")
+                        .WithMany("Schedules")
+                        .HasForeignKey("CourseId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("AttendanceSystem.Models.Student", "Student")
+                        .WithMany("Schedules")
+                        .HasForeignKey("StudentId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("AttendanceSystem.Models.Teacher", "Teacher")
+                        .WithMany("Schedules")
+                        .HasForeignKey("TeacherId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Course");
+
+                    b.Navigation("Student");
+
+                    b.Navigation("Teacher");
+                });
+
             modelBuilder.Entity("AttendanceSystem.Models.Student", b =>
                 {
                     b.HasOne("AttendanceSystem.Models.Admin", "Admin")
@@ -317,11 +357,15 @@ namespace AttendanceSystem.Migrations
                     b.Navigation("Attendances");
 
                     b.Navigation("CourseStudents");
+
+                    b.Navigation("Schedules");
                 });
 
             modelBuilder.Entity("AttendanceSystem.Models.Student", b =>
                 {
                     b.Navigation("Attendances");
+
+                    b.Navigation("Schedules");
 
                     b.Navigation("StudentCourses");
                 });
@@ -329,6 +373,8 @@ namespace AttendanceSystem.Migrations
             modelBuilder.Entity("AttendanceSystem.Models.Teacher", b =>
                 {
                     b.Navigation("Courses");
+
+                    b.Navigation("Schedules");
 
                     b.Navigation("Students");
                 });

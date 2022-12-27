@@ -1,5 +1,6 @@
 ﻿using AttendanceSystem.Interfaces;
 using AttendanceSystem.Models;
+using OfficeOpenXml.ConditionalFormatting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,10 +14,8 @@ namespace AttendanceSystem.Tasks
     public class StudentServices : IBasicAction<Student>
     {
         private static readonly AttendanceSystemDbContext db = new AttendanceSystemDbContext();
-        public Student Create(Student student/*, int? foreignKey1, int? foreignKey2*/)
+        public Student Create(Student student)
         {
-/*            student.AdminId = foreignKey1 != null ? foreignKey1: 1 ;
-            student.TeacherId = foreignKey2;*/
             Student entity = db.Students.Add(student).Entity;
             db.SaveChanges();
             return entity;
@@ -66,5 +65,27 @@ namespace AttendanceSystem.Tasks
         {
             return db.Students.Where(s => s.TeacherId == id).ToList();
         }
+
+        public bool GiveAttendance(Student student,Course course,Attendance attendance)
+        {
+            Attendance obj = new Attendance();
+            obj.CourseId = course.Id;
+            obj.StudentId = student.Id;
+            obj.Present = attendance.Present;
+            obj.Time = attendance.Time;
+            db.Attendances.Add(obj);
+            return db.SaveChanges() > 0;
+        }
+
+        public bool ShowAttendance(Attendance attendance)
+        {
+            List<Attendance> entity = db.Attendances.Where(x => x.StudentId == attendance.StudentId).ToList();
+            foreach(Attendance at in entity)
+            {
+                Console.WriteLine("Student ID: "+at.StudentId +"\nTime: "+at.Time +"\nPresent: "+ at.Present+"\n");
+            }
+            return true;
+        }
     }
-}
+    }
+
