@@ -12,39 +12,47 @@ namespace AttendanceSystem.HomePages
     {
         public static void TeacherOption(Teacher teacher)
         {
-            Console.WriteLine("\n\t\t\t\tWelcome to your Portal: " + teacher.Name);
-            Console.WriteLine("Services:\n1. See attendance list of all students\n2. See attendance of students course wise\n3. See attendance of students Student ID wise\n4. View my courses\n");
-            Console.Write("Enter a service number: ");
-            int choice = int.Parse(Console.ReadLine());
+            while (true)
+            {
 
-            if (choice == 1)
-            {
-                Attendance attendance = new Attendance();
-                bool entity = new TeacherServices().ShowAttendanceOfAllStudents(attendance);
+                Console.WriteLine("\n\t\t\t\tWelcome to your Portal: " + teacher.Name);
+                Console.Write("Services:\n1. See attendance list of all students\n2. See attendance of students course wise\n3. See attendance of students Student ID wise\n4. View my courses\n5. Logout\nEnter option: ");
+
+                int choice = int.Parse(Console.ReadLine());
+
+                if (choice == 1)
+                {
+                    Attendance attendance = new Attendance();
+                    bool entity = new TeacherServices().ShowAttendanceOfAllStudents(attendance);
+                }
+                else if (choice == 2)
+                {
+                    Attendance attendance = new Attendance();
+                    Console.Write("Enter Course ID: ");
+                    attendance.CourseId = int.Parse(Console.ReadLine());
+                    bool entity = new TeacherServices().ShowAttendanceByCourse(attendance);
+                }
+                else if (choice == 3)
+                {
+                    Attendance attendance = new Attendance();
+                    Console.Write("Enter Student ID: ");
+                    attendance.StudentId = int.Parse(Console.ReadLine());
+                    bool entity = new TeacherServices().ShowAttendanceByStudentID(attendance);
+                }
+                else if (choice == 4)
+                {
+                    Course course = new Course();
+                    Console.Write("Please re-enter your Teacher ID: ");
+                    course.TeacherId = int.Parse(Console.ReadLine());
+                    bool c = new TeacherServices().ViewCourses(course);
+                }
+                else if (choice == 5)
+                {
+                    break;
+                }
+                else
+                    Console.WriteLine("Enter a valid choice");
             }
-            else if (choice == 2)
-            {
-                Attendance attendance = new Attendance();
-                Console.Write("Enter Course ID: ");
-                attendance.CourseId = int.Parse(Console.ReadLine());
-                bool entity = new TeacherServices().ShowAttendanceByCourse(attendance);
-            }
-            else if (choice == 3)
-            {
-                Attendance attendance = new Attendance();
-                Console.Write("Enter Student ID: ");
-                attendance.StudentId = int.Parse(Console.ReadLine());
-                bool entity = new TeacherServices().ShowAttendanceByStudentID(attendance);
-            }
-            else if (choice == 4)
-            {
-                Course course = new Course();
-                Console.Write("Please re-enter your Teacher ID: ");
-                course.TeacherId = int.Parse(Console.ReadLine());
-                bool c = new TeacherServices().ViewCourses(course);
-            }
-            else
-                Console.WriteLine("Enter a valid choice");
         }
 
     }
