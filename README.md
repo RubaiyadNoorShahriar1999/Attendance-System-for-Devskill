@@ -5,6 +5,7 @@
 - Core features are implemented with C#10  (.NET 6) and Object Oriented Programming (OOP) concepts
 - Database - Microsoft SQL 2016
 - Technologies - ADO.NET, Entity Framework Core, Fluent API
+- Principles - SOLID Principle (Liskov Substitution not implemented)
 
 # Microsoft Visual Studio 2022
 - Visite <a href ="https://learn.microsoft.com/en-us/visualstudio/install/install-visual-studio?view=vs-2022"> Microsoft Visual Studio 2022 </a> for proper IDE installation
