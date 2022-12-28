@@ -95,7 +95,7 @@ namespace AttendanceSystem.Tasks
             return true;
         }
 
-        public bool ShowAllAttendanceOfCourse(Attendance attendance)
+/*        public bool ShowAllAttendanceOfCourse(Attendance attendance)
         {
             List<Attendance> entity = db.Attendances.Where(y => y.CourseId == attendance.CourseId).ToList();
             Course course = db.Courses.Where(x => x.Id == attendance.CourseId).FirstOrDefault();
@@ -113,7 +113,7 @@ namespace AttendanceSystem.Tasks
                 }
             }
             return true;
-        }
+        }*/
     }
     }
 

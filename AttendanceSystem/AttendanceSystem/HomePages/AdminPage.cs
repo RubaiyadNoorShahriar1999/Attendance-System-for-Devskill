@@ -1,5 +1,6 @@
 ﻿using AttendanceSystem.Models;
 using AttendanceSystem.Tasks;
+using OfficeOpenXml.ConditionalFormatting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AttendanceSystem
+namespace AttendanceSystem.HomePages
 {
     public class AdminPage
     {
@@ -23,8 +24,8 @@ namespace AttendanceSystem
             {
                 Console.WriteLine("Services:\n1. Add a Teacher 2. Delete a Teacher");
                 Console.Write("Enter service number: ");
-                int addOrDelete= int.Parse(Console.ReadLine());
-                if(addOrDelete == 1)
+                int addOrDelete = int.Parse(Console.ReadLine());
+                if (addOrDelete == 1)
                 {
                     Teacher teacher = new Teacher();
                     Console.Write("Enter Teacher name: ");
@@ -46,12 +47,12 @@ namespace AttendanceSystem
                     }
 
                 }
-                else if(addOrDelete == 2)
+                else if (addOrDelete == 2)
                 {
                     Console.Write("Enter Teacher ID: ");
                     int tid = int.Parse(Console.ReadLine());
 
-                    if(new TeacherServices().Get(tid) == null)
+                    if (new TeacherServices().Get(tid) == null)
                     {
                         Console.WriteLine("Teacher doesn't exists");
                         return;
@@ -59,7 +60,7 @@ namespace AttendanceSystem
 
                     List<Student> students = new StudentServices().GetStudentByTeacherId(tid);
 
-                    foreach(var student in students)
+                    foreach (var student in students)
                     {
                         student.TeacherId = 1;
                         new StudentServices().Update(student);
@@ -86,7 +87,7 @@ namespace AttendanceSystem
                 else
                     Console.WriteLine("Enter a valid choice");
             }
-            else if(choice == 2)
+            else if (choice == 2)
             {
                 Console.WriteLine("Services:\n1. Add a Student 2. Delete a Student");
                 Console.Write("Enter service number: ");
@@ -121,16 +122,16 @@ namespace AttendanceSystem
                         Console.WriteLine("Failed");
                     }
                 }
-                else if(addOrDelete == 2)
+                else if (addOrDelete == 2)
                 {
                     Console.Write("Insert Student ID: ");
                     int ID = int.Parse(Console.ReadLine());
                     Student student = new StudentServices().Get(ID);
-                    if(student == null)
+                    if (student == null)
                         Console.WriteLine("Student does not exist");
                     else
                     {
-                        if(student.TeacherId == null)
+                        if (student.TeacherId == null)
                         {
                             Console.Write("Enter a new Teacher ID: ");
                             int tID = int.Parse(Console.ReadLine());
@@ -158,7 +159,9 @@ namespace AttendanceSystem
                     }
                 }
                 else
+                {
                     Console.WriteLine("Enter a valid choice");
+                }
             }
             else if (choice == 3)
             {
@@ -208,7 +211,7 @@ namespace AttendanceSystem
                     Console.Write("Insert Course ID: ");
                     int ID = int.Parse(Console.ReadLine());
                     Course course = new CourseServices().Get(ID);
-                    if(course == null)
+                    if (course == null)
                         Console.WriteLine("Course does not exist");
                     else
                     {
@@ -248,38 +251,42 @@ namespace AttendanceSystem
                 int courseId = int.Parse(Console.ReadLine());
                 Console.Write("Enter Student ID: ");
                 int studentId = int.Parse(Console.ReadLine());
+                int i = 0;
 
-                
-                course = db.Courses.Where(y => y.Id == courseId).FirstOrDefault();
-                student = db.Students.Where(y => y.Id == studentId).FirstOrDefault();
-
-                if (course != null && student != null)
+                List<CourseStudent> cs = db.CourseStudents.Where(x => x.CourseId == courseId).ToList();
+                foreach(CourseStudent c in cs)
                 {
-                    courseStudent.StudentId = studentId;
-                    courseStudent.CourseId = courseId;
-                    db.Add(courseStudent);
-                    db.SaveChanges();
-                    Console.WriteLine("Successfully assigned the course to Student ID " + studentId);
-                }
-                else
-                {
-                    Console.WriteLine("Enter Valid ID");
+                    if (c.StudentId == studentId)
+                        i++;
                 }
 
                 #region Duplication checking
-                /*                CourseStudent cs1 = db.CourseStudents.Where(x => x.CourseId == courseId).FirstOrDefault();
-                                CourseStudent cs2 = db.CourseStudents.Where(x => x.CourseId == courseId).FirstOrDefault();*/
-                /*                if (cs1 != null && cs2 != null)
-                                {
-                                }
-                                else
-                                {
-                                    Console.WriteLine("Duplicate ID");
-                                }*/
-                #endregion 
 
+                if (i == 0)
+                {
+                    course = db.Courses.Where(y => y.Id == courseId).FirstOrDefault();
+                    student = db.Students.Where(y => y.Id == studentId).FirstOrDefault();
+
+                    if (course != null && student != null)
+                    {
+                        courseStudent.StudentId = studentId;
+                        courseStudent.CourseId = courseId;
+                        db.Add(courseStudent);
+                        db.SaveChanges();
+                        Console.WriteLine("Successfully assigned the course to Student ID " + studentId);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Enter Valid ID");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("The student is already enrolled in this course");
+                }
+                #endregion
             }
-            else if(choice == 5)
+            else if (choice == 5)
             {
                 Schedule schedule = new Schedule();
                 Console.Write("Enter Course ID: ");
@@ -289,12 +296,12 @@ namespace AttendanceSystem
                 Console.Write("Enter Student ID: ");
                 schedule.StudentId = int.Parse(Console.ReadLine());
                 Console.Write("Enter number of classes: ");
-                schedule.NoOfClasses= int.Parse(Console.ReadLine());
+                schedule.NoOfClasses = int.Parse(Console.ReadLine());
                 Console.Write("Enter the class times (ex. Monday 8PM-11PM,Thursday 9PM-11PM): ");
-                schedule.ClassTime = Console.ReadLine().Replace(@"\s", ""); 
+                schedule.ClassTime = Console.ReadLine().Replace(@"\s", "");
 
                 Schedule entity = new AdminServices().AssignClassSchedule(schedule);
-                if(entity != null)
+                if (entity != null)
                 {
                     Console.WriteLine("Successfully added a new schedule");
                 }

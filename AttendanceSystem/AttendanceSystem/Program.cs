@@ -1,4 +1,5 @@
 ﻿using AttendanceSystem;
+using AttendanceSystem.HomePages;
 using AttendanceSystem.Models;
 using AttendanceSystem.Tasks;
 
@@ -31,7 +32,7 @@ while(count > 0)
             if (a1 != null)
                 AdminPage.AdminOption(a1);
             else
-                Console.WriteLine("Wrong Username and Password");/*break;*/
+                Console.WriteLine("Wrong Username and Password"); /*break;*/
         }
         else if (choice == 2)
         {
@@ -39,7 +40,7 @@ while(count > 0)
             if (t1 != null)
                 TeacherPage.TeacherOption(t1);
             else
-                Console.WriteLine("Wrong Username and Password");break;
+                Console.WriteLine("Wrong Username and Password"); break;
         }
         else if (choice == 3)
         {
@@ -47,7 +48,7 @@ while(count > 0)
             if (s1 != null)
                 StudentPage.StudentOption(s1);
             else
-                Console.WriteLine("Wrong Username and Password");break;
+                Console.WriteLine("Wrong Username and Password"); break;
         }          
     }
     else

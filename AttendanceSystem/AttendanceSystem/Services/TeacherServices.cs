@@ -29,7 +29,7 @@ namespace AttendanceSystem.Tasks
             return db.SaveChanges() > 0;
         }
 
-        public bool ShowAttendanceOfAStudents(Attendance attendance)
+/*        public bool ShowAttendanceOfAStudents(Attendance attendance)
         {
             List<Attendance> attendances = db.Attendances.Where(x => x.StudentId == attendance.StudentId).ToList();
             Course course = db.Courses.Where(x => x.Id == attendance.CourseId).FirstOrDefault();
@@ -50,10 +50,51 @@ namespace AttendanceSystem.Tasks
             }
             
             return true;
-        }
+        }*/
         public bool ShowAttendanceOfAllStudents(Attendance attendance)
         {
             List<Attendance> attendances = db.Attendances.ToList();
+            foreach (Attendance a in attendances)
+            {
+                Course course = db.Courses.Where(x => x.Id == a.CourseId).FirstOrDefault();
+                Student student = db.Students.Where(x => x.Id == a.StudentId).FirstOrDefault();
+                Console.Write("Student Name: " + student.Name + " Course Name: " + course.CourseName);
+                if (a.Present.ToLower() == "present")
+                {
+                    Console.Write(" Present: " + ((char)0x221A).ToString() + " ");
+                }
+                else
+                {
+                    Console.Write(" Present: x ");
+                }
+                Console.WriteLine("Time of attendance: " + a.Time);
+            }
+            return true;
+        }
+        public bool ShowAttendanceByCourse(Attendance attendance)
+        {
+            List<Attendance> attendances = db.Attendances.Where(x => x.CourseId == attendance.CourseId).ToList();
+            foreach (Attendance a in attendances)
+            {
+                Course course = db.Courses.Where(x => x.Id == a.CourseId).FirstOrDefault();
+                Student student = db.Students.Where(x => x.Id == a.StudentId).FirstOrDefault();
+                Console.Write("Course Name: " + course.CourseName + " Student Name: " + student.Name);
+                if (a.Present.ToLower() == "present")
+                {
+                    Console.Write(" Present: " + ((char)0x221A).ToString() + " ");
+                }
+                else
+                {
+                    Console.Write(" Present: x ");
+                }
+                Console.WriteLine("Time of attendance: " + a.Time);
+            }
+            return true;
+        }
+
+        public bool ShowAttendanceByStudentID(Attendance attendance)
+        {
+            List<Attendance> attendances = db.Attendances.Where(x => x.StudentId == attendance.StudentId).ToList();
             foreach (Attendance a in attendances)
             {
                 Course course = db.Courses.Where(x => x.Id == a.CourseId).FirstOrDefault();

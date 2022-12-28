@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AttendanceSystem
+namespace AttendanceSystem.HomePages
 {
     public class StudentPage
     {
@@ -17,14 +17,14 @@ namespace AttendanceSystem
             Console.Write("Enter a service number: ");
             int choice = int.Parse(Console.ReadLine());
 
-            if(choice == 1)
+            if (choice == 1)
             {
                 Student st = new Student();
                 Course c = new Course();
                 Attendance at = new Attendance();
 
                 Console.Write("Enter your Student ID: ");
-                st.Id= int.Parse(Console.ReadLine());
+                st.Id = int.Parse(Console.ReadLine());
                 Console.Write("Enter the Course ID you want to give attendance: ");
                 c.Id = int.Parse(Console.ReadLine());
                 Console.Write("Write Present (Caution: Anything other then \"Present\" may result in \"Not Presesnt\"): ");
@@ -32,7 +32,7 @@ namespace AttendanceSystem
                 at.Time = DateTime.Now;
                 bool entity = new StudentServices().GiveAttendance(st, c, at);
 
-                if(entity)
+                if (entity)
                 {
                     Console.WriteLine("Successfully Added your attedance to the list");
                 }
@@ -42,19 +42,19 @@ namespace AttendanceSystem
                 }
 
             }
-            else if(choice == 2) 
+            else if (choice == 2)
             {
                 Console.WriteLine("\nChoose an option: 1. Attendance of all courses 2. Attendance of a particular course (Not complete)");
                 Console.Write("Enter your choice: ");
                 int choice1 = int.Parse(Console.ReadLine());
-                if(choice1 == 1)
+                if (choice1 == 1)
                 {
                     Attendance at1 = new Attendance();
                     Console.Write("Enter your Student ID: ");
                     at1.StudentId = int.Parse(Console.ReadLine());
                     bool entity = new StudentServices().ShowAttendanceAll(at1);
                 }
-                else if(choice == 2)
+                else if (choice == 2)
                 {
                     /*                    Attendance at2 = new Attendance();
                                         Console.Write("Enter your Student ID: ");
