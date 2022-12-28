@@ -8,7 +8,7 @@ namespace AttendanceSystem.Interfaces
 {
     public interface IBasicAction<Type>
     {
-        public Type Create(Type type/*,int? foreignKey1, int? foreignKey2*/);
+        public Type Create(Type type);
         public List<Type> Read();
         public bool Update(Type type);
         public bool Delete(int id);

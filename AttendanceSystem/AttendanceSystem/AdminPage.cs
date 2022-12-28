@@ -14,15 +14,15 @@ namespace AttendanceSystem
         private static readonly AttendanceSystemDbContext db = new AttendanceSystemDbContext();
         public static void AdminOption(Admin admin)
         {
-
-            Console.WriteLine("Task:\n1. Create/Delete a Teacher\n2. Create/Delete a Student\n3. Add/Remove a Course\n4. Assign a course to a student\n5. Set class schedule for a course");
+            Console.WriteLine("\n\t\t\t\tWelcome to the System Admin " + admin.Name);
+            Console.WriteLine("Services:\n1. Create/Delete a Teacher\n2. Create/Delete a Student\n3. Add/Remove a Course\n4. Assign a course to a student\n5. Set class schedule for a course");
+            Console.Write("\nEnter service number: ");
             int choice = int.Parse(Console.ReadLine());
 
             if (choice == 1)
             {
-                // take course id and student id from user
-                // check if the id exists in the database
                 Console.WriteLine("Services:\n1. Add a Teacher 2. Delete a Teacher");
+                Console.Write("Enter service number: ");
                 int addOrDelete= int.Parse(Console.ReadLine());
                 if(addOrDelete == 1)
                 {
@@ -46,7 +46,7 @@ namespace AttendanceSystem
                     }
 
                 }
-                else
+                else if(addOrDelete == 2)
                 {
                     Console.Write("Enter Teacher ID: ");
                     int tid = int.Parse(Console.ReadLine());
@@ -61,8 +61,16 @@ namespace AttendanceSystem
 
                     foreach(var student in students)
                     {
-                        student.TeacherId = null;
+                        student.TeacherId = 1;
                         new StudentServices().Update(student);
+                    }
+
+                    List<Course> courses = new CourseServices().GetCourseByTeacherId(tid);
+
+                    foreach (var course in courses)
+                    {
+                        course.TeacherId = 1;
+                        new CourseServices().Update(course);
                     }
 
                     var isDeleted = new TeacherServices().Delete(tid);
@@ -75,10 +83,13 @@ namespace AttendanceSystem
                         Console.WriteLine("Failed");
                     }
                 }
+                else
+                    Console.WriteLine("Enter a valid choice");
             }
             else if(choice == 2)
             {
                 Console.WriteLine("Services:\n1. Add a Student 2. Delete a Student");
+                Console.Write("Enter service number: ");
                 int addOrDelete = int.Parse(Console.ReadLine());
                 if (addOrDelete == 1)
                 {
@@ -102,7 +113,7 @@ namespace AttendanceSystem
                     Student entity = new StudentServices().Create(student);
                     if (entity != null)
                     {
-                        Console.WriteLine("Successful, ");
+                        Console.WriteLine("Successfully added student ");
                         Console.WriteLine("Student ID: " + entity.Id.ToString());
                     }
                     else
@@ -110,41 +121,49 @@ namespace AttendanceSystem
                         Console.WriteLine("Failed");
                     }
                 }
-                else
+                else if(addOrDelete == 2)
                 {
                     Console.Write("Insert Student ID: ");
                     int ID = int.Parse(Console.ReadLine());
                     Student student = new StudentServices().Get(ID);
-                    if(student.TeacherId == null)
+                    if(student == null)
+                        Console.WriteLine("Student does not exist");
+                    else
                     {
-                        Console.Write("Enter a new Teacher ID: ");
-                        int tID = int.Parse(Console.ReadLine());
-                        Teacher isTeacherExist = new TeacherServices().Get(tID);
-                        if (isTeacherExist == null)
+                        if(student.TeacherId == null)
                         {
-                            Console.WriteLine("Teacher does not exist");
-                            return;
+                            Console.Write("Enter a new Teacher ID: ");
+                            int tID = int.Parse(Console.ReadLine());
+                            Teacher isTeacherExist = new TeacherServices().Get(tID);
+                            if (isTeacherExist == null)
+                            {
+                                Console.WriteLine("Teacher does not exist");
+                                return;
+                            }
+                            else
+                            {
+                                student.TeacherId = tID;
+                            }
+                        }
+                        bool entity = new StudentServices().Delete(ID);
+                        if (entity != false)
+                        {
+                            Console.Write("Successful");
+                            Console.WriteLine("Student ID: " + ID + " successfully deleted");
                         }
                         else
                         {
-                            student.TeacherId = tID;
+                            Console.WriteLine("Failed");
                         }
                     }
-                    bool entity = new StudentServices().Delete(ID);
-                    if (entity != false)
-                    {
-                        Console.Write("Successful, ");
-                        Console.WriteLine("Student ID: " + ID + " successfully deleted");
-                    }
-                    else
-                    {
-                        Console.WriteLine("Failed");
-                    }
                 }
+                else
+                    Console.WriteLine("Enter a valid choice");
             }
             else if (choice == 3)
             {
                 Console.WriteLine("Services:\n1. Add a Course 2. Delete a Course");
+                Console.Write("Enter service number: ");
                 int addOrDelete = int.Parse(Console.ReadLine());
                 if (addOrDelete == 1)
                 {
@@ -184,34 +203,41 @@ namespace AttendanceSystem
                         Console.WriteLine("Failed");
                     }
                 }
-                else
+                else if (addOrDelete == 2)
                 {
                     Console.Write("Insert Course ID: ");
                     int ID = int.Parse(Console.ReadLine());
                     Course course = new CourseServices().Get(ID);
-                    Console.WriteLine("Enter ID of the Alternative Teacher: ");
-                    int backupTeacherID = int.Parse(Console.ReadLine());
-                    Teacher isTeacherExist = new TeacherServices().Get(backupTeacherID);
-                    if (isTeacherExist == null)
-                    {
-                        Console.WriteLine("Teacher does not exist");
-                        return;
-                    }
+                    if(course == null)
+                        Console.WriteLine("Course does not exist");
                     else
                     {
-                        course.TeacherId = isTeacherExist.Id;
-                    }
-                    bool entity = new CourseServices().Delete(ID);
-                    if (entity != false)
-                    {
-                        Console.Write("Successful, ");
-                        Console.WriteLine("Course ID: " + ID + " successfully deleted");
-                    }
-                    else
-                    {
-                        Console.WriteLine("Failed");
+                        Console.WriteLine("Enter ID of the Alternative Teacher: ");
+                        int backupTeacherID = int.Parse(Console.ReadLine());
+                        Teacher isTeacherExist = new TeacherServices().Get(backupTeacherID);
+                        if (isTeacherExist == null)
+                        {
+                            Console.WriteLine("Teacher does not exist");
+                            return;
+                        }
+                        else
+                        {
+                            course.TeacherId = isTeacherExist.Id;
+                        }
+                        bool entity = new CourseServices().Delete(ID);
+                        if (entity != false)
+                        {
+                            Console.Write("Successful, ");
+                            Console.WriteLine("Course ID: " + ID + " successfully deleted");
+                        }
+                        else
+                        {
+                            Console.WriteLine("Failed");
+                        }
                     }
                 }
+                else
+                    Console.WriteLine("Enter a valid choice");
             }
             else if (choice == 4)
             {

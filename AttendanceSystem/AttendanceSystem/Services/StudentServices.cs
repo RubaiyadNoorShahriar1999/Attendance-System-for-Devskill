@@ -77,12 +77,40 @@ namespace AttendanceSystem.Tasks
             return db.SaveChanges() > 0;
         }
 
-        public bool ShowAttendance(Attendance attendance)
+        public bool ShowAttendanceAll(Attendance attendance)
         {
             List<Attendance> entity = db.Attendances.Where(x => x.StudentId == attendance.StudentId).ToList();
             foreach(Attendance at in entity)
             {
-                Console.WriteLine("Student ID: "+at.StudentId +"\nTime: "+at.Time +"\nPresent: "+ at.Present+"\n");
+                Console.Write("Student ID: "+at.StudentId +" Course ID: " + at.CourseId +" Time: "+at.Time );
+                if (at.Present.ToLower() == "present")
+                {
+                    Console.WriteLine(" Present: " + ((char)0x221A).ToString() + "\n");
+                }
+                else 
+                {
+                    Console.WriteLine(" Present: x\n");
+                }
+            }
+            return true;
+        }
+
+        public bool ShowAllAttendanceOfCourse(Attendance attendance)
+        {
+            List<Attendance> entity = db.Attendances.Where(y => y.CourseId == attendance.CourseId).ToList();
+            Course course = db.Courses.Where(x => x.Id == attendance.CourseId).FirstOrDefault();
+            Student student = db.Students.Where(x => x.Id == attendance.StudentId).FirstOrDefault();
+            foreach (Attendance at in entity)
+            {
+                Console.Write("Student ID: " + student.Id + " Course ID: " + course.Id + " Time: " + at.Time);
+                if (at.Present.ToLower() == "present")
+                {
+                    Console.WriteLine(" Present: " + ((char)0x221A).ToString() + "\n");
+                }
+                else
+                {
+                    Console.WriteLine(" Present: x\n");
+                }
             }
             return true;
         }

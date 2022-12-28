@@ -12,8 +12,9 @@ namespace AttendanceSystem
     {
         public static void StudentOption(Student student)
         {
-            Console.WriteLine("Wellcome to your Student Portal " + student.Name);
-            Console.WriteLine("Tasks:\n1. Give your Attendance\n2. View your attendance sheet");
+            Console.WriteLine("\n\t\t\t\tWelcome to your Student Portal " + student.Name);
+            Console.WriteLine("Services:\n1. Give your Attendance\n2. View your attendance sheet");
+            Console.Write("Enter a service number: ");
             int choice = int.Parse(Console.ReadLine());
 
             if(choice == 1)
@@ -22,7 +23,7 @@ namespace AttendanceSystem
                 Course c = new Course();
                 Attendance at = new Attendance();
 
-                Console.WriteLine("Enter your Student ID: ");
+                Console.Write("Enter your Student ID: ");
                 st.Id= int.Parse(Console.ReadLine());
                 Console.Write("Enter the Course ID you want to give attendance: ");
                 c.Id = int.Parse(Console.ReadLine());
@@ -43,11 +44,33 @@ namespace AttendanceSystem
             }
             else if(choice == 2) 
             {
-                Attendance at = new Attendance();
-                Console.Write("Enter your Student ID: ");
-                at.StudentId = int.Parse(Console.ReadLine());
-                bool entity = new StudentServices().ShowAttendance(at);
+                Console.WriteLine("\nChoose an option: 1. Attendance of all courses 2. Attendance of a particular course (Not complete)");
+                Console.Write("Enter your choice: ");
+                int choice1 = int.Parse(Console.ReadLine());
+                if(choice1 == 1)
+                {
+                    Attendance at1 = new Attendance();
+                    Console.Write("Enter your Student ID: ");
+                    at1.StudentId = int.Parse(Console.ReadLine());
+                    bool entity = new StudentServices().ShowAttendanceAll(at1);
+                }
+                else if(choice == 2)
+                {
+                    /*                    Attendance at2 = new Attendance();
+                                        Console.Write("Enter your Student ID: ");
+                                        at2.StudentId = int.Parse(Console.ReadLine());
+                                        Console.Write("Enter your Course ID: ");
+                                        at2.CourseId = int.Parse(Console.ReadLine());
+                                        bool entity = new StudentServices().ShowAllAttendanceOfCourse(at2);*/
+                    Console.WriteLine("This feature is not yet complete please try again later");
+                }
+                else
+                {
+                    Console.WriteLine("Enter a valid choice");
+                }
             }
+            else
+                Console.WriteLine("Enter a valid choice");
         }
     }
 }

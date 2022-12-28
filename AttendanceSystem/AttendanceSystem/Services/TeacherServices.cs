@@ -31,38 +31,43 @@ namespace AttendanceSystem.Tasks
 
         public bool ShowAttendanceOfAStudents(Attendance attendance)
         {
-            Attendance attendances = db.Attendances.Where(x => x.StudentId == attendance.StudentId).Where(y => y.CourseId == attendance.CourseId).FirstOrDefault();
+            List<Attendance> attendances = db.Attendances.Where(x => x.StudentId == attendance.StudentId).ToList();
             Course course = db.Courses.Where(x => x.Id == attendance.CourseId).FirstOrDefault();
             Student student = db.Students.Where(x => x.Id == attendance.StudentId).FirstOrDefault();
-        
-            Console.Write("Student Name: "+ student.Name + " Course Name: "+ course.CourseName);
-            if (attendances.Present.ToLower() == "present")
+
+            foreach (Attendance a in attendances)
             {
-                Console.WriteLine(" Present: " + ((char)0x221A).ToString()+"\n");
-            }
-            else
-            {
-                Console.WriteLine(" Present: x\n");
+                Console.Write("Student Name: "+ student.Name + " Course Name: "+ course.CourseName);
+                if (a.Present.ToLower() == "present")
+                {
+                    Console.WriteLine(" Present: " + ((char)0x221A).ToString()+"\n");
+                }
+                else
+                {
+                    Console.WriteLine(" Present: x\n");
+                }
+
             }
             
             return true;
         }
         public bool ShowAttendanceOfAllStudents(Attendance attendance)
         {
-            List<Attendance> attendances = db.Attendances.Where(x => x.StudentId == attendance.StudentId).ToList();
-            Course course = db.Courses.Where(x => x.Id == attendance.CourseId).FirstOrDefault();
-            Student student = db.Students.Where(x => x.Id == attendance.StudentId).FirstOrDefault();
+            List<Attendance> attendances = db.Attendances.ToList();
             foreach (Attendance a in attendances)
             {
+                Course course = db.Courses.Where(x => x.Id == a.CourseId).FirstOrDefault();
+                Student student = db.Students.Where(x => x.Id == a.StudentId).FirstOrDefault();
                 Console.Write("Student Name: " + student.Name + " Course Name: " + course.CourseName);
                 if (a.Present.ToLower() == "present")
                 {
-                    Console.WriteLine(" Present: " + ((char)0x221A).ToString());
+                    Console.Write(" Present: " + ((char)0x221A).ToString() + " ");
                 }
                 else
                 {
-                    Console.WriteLine(" Present: x\n");
+                    Console.Write(" Present: x ");
                 }
+                Console.WriteLine("Time of attendance: " + a.Time);
             }
             return true;
         }

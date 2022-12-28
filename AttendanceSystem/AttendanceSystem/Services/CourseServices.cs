@@ -34,6 +34,11 @@ namespace AttendanceSystem.Tasks
                 return false;
             }
         }
+        public List<Course> GetCourseByTeacherId(int id)
+        {
+            return db.Courses.Where(s => s.TeacherId == id).ToList();
+        }
+
 
         public Course Get(int id)
         {

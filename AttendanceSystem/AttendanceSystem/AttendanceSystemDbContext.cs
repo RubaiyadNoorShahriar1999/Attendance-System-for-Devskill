@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace AttendanceSystem
 {
-    public class AttendanceSystemDbContext: DbContext
+    public class AttendanceSystemDbContext : DbContext
     {
         private readonly string _connectionString;
         private readonly string _migrationAssembly;
@@ -45,7 +45,7 @@ namespace AttendanceSystem
                         .ToTable("Attendances");
             modelBuilder.Entity<Schedule>()
                         .ToTable("Schedules");
-                
+
             #region Admin Relations
 
             modelBuilder.Entity<Admin>()
@@ -78,21 +78,21 @@ namespace AttendanceSystem
                 .HasMany(x => x.Students)
                 .WithOne(y => y.Teacher)
                 .HasForeignKey(z => z.TeacherId)
-                .OnDelete(DeleteBehavior.SetNull);
+                .OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder.Entity<Teacher>()
                 .HasMany(x => x.Courses)
                 .WithOne(y => y.Teacher)
                 .HasForeignKey(z => z.TeacherId)
-                .OnDelete(DeleteBehavior.SetNull);
+                .OnDelete(DeleteBehavior.NoAction);
 
-/*            #region extra portion Course Teacher reverse
-            modelBuilder.Entity<Course>()
-                .HasOne(x => x.Teacher)
-                .WithMany(y => y.Courses)
-                .HasForeignKey(z => z.TeacherId)
-                .OnDelete(DeleteBehavior.SetNull);
-            #endregion*/
+            /*            #region extra portion Course Teacher reverse
+                        modelBuilder.Entity<Course>()
+                            .HasOne(x => x.Teacher)
+                            .WithMany(y => y.Courses)
+                            .HasForeignKey(z => z.TeacherId)
+                            .OnDelete(DeleteBehavior.SetNull);
+                        #endregion*/
 
             modelBuilder.Entity<Teacher>()
                 .HasOne(x => x.Admin)
@@ -117,7 +117,7 @@ namespace AttendanceSystem
                 .HasOne(x => x.Teacher)
                 .WithMany(y => y.Students)
                 .HasForeignKey(z => z.TeacherId)
-                .OnDelete(DeleteBehavior.SetNull);
+                .OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder.Entity<Student>()
                 .HasMany(x => x.Attendances).WithOne(y => y.Student).HasForeignKey(z => z.StudentId).OnDelete(DeleteBehavior.NoAction);
@@ -136,13 +136,13 @@ namespace AttendanceSystem
                         .HasOne(x => x.Course)
                         .WithMany(y => y.CourseStudents)
                         .HasForeignKey(z => z.CourseId)
-                        .OnDelete(DeleteBehavior.NoAction);
+                        .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<CourseStudent>()
                         .HasOne(x => x.Student)
                         .WithMany(y => y.StudentCourses)
                         .HasForeignKey(z => z.StudentId)
-                        .OnDelete(DeleteBehavior.NoAction);
+                        .OnDelete(DeleteBehavior.Cascade);
 
             #endregion
 
@@ -168,7 +168,7 @@ namespace AttendanceSystem
             #region Schedule Relations
 
             modelBuilder.Entity<Schedule>()
-            .HasKey((x) => new { x.CourseId, x.TeacherId,x.StudentId });
+            .HasKey((x) => new { x.CourseId, x.TeacherId, x.StudentId });
 
             modelBuilder.Entity<Schedule>()
                         .HasOne(x => x.Course)
