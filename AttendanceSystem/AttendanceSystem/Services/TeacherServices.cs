@@ -112,6 +112,16 @@ namespace AttendanceSystem.Tasks
             }
             return true;
         }
+
+        public bool ViewCourses(Course course)
+        {
+            List<Course> courses = db.Courses.Where(x => x.TeacherId== course.TeacherId).ToList();
+            foreach (Course a in courses)
+            {
+                Console.WriteLine("Course name: " + a.CourseName + " Course ID: "+a.Id);
+            }
+            return true;
+        }
         public Teacher Get(int id)
         {
             return db.Teachers.Find(id);

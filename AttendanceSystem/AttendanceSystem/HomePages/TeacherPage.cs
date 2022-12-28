@@ -13,7 +13,7 @@ namespace AttendanceSystem.HomePages
         public static void TeacherOption(Teacher teacher)
         {
             Console.WriteLine("\n\t\t\t\tWelcome to your Portal: " + teacher.Name);
-            Console.WriteLine("Services:\n1. See attendance list of all students\n2. See attendance of students course wise\n3. See attendance of students Student ID wise");
+            Console.WriteLine("Services:\n1. See attendance list of all students\n2. See attendance of students course wise\n3. See attendance of students Student ID wise\n4. View my courses\n");
             Console.Write("Enter a service number: ");
             int choice = int.Parse(Console.ReadLine());
 
@@ -35,6 +35,13 @@ namespace AttendanceSystem.HomePages
                 Console.Write("Enter Student ID: ");
                 attendance.StudentId = int.Parse(Console.ReadLine());
                 bool entity = new TeacherServices().ShowAttendanceByStudentID(attendance);
+            }
+            else if (choice == 4)
+            {
+                Course course = new Course();
+                Console.Write("Please re-enter your Teacher ID: ");
+                course.TeacherId = int.Parse(Console.ReadLine());
+                bool c = new TeacherServices().ViewCourses(course);
             }
             else
                 Console.WriteLine("Enter a valid choice");
