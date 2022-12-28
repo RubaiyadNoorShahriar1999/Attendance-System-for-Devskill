@@ -13,14 +13,16 @@ dotnet tool install --global dotnet-ef --version 3.1.0
 
 #Migration generation and Database creation:
 dotnet ef migrations add AddMigrations --project AttendanceSystem --context AttendanceSystemDbContext
+
+#Database Update
 dotnet ef database update --project AttendanceSystem --context AttendanceSystemDbContext
 
 #removing migrations:
 dotnet ef migrations remove --project AttendanceSystem --context AttendanceSystemDbContext
 
-1
-rubaiyad
-asd@123
+#Admin ID & Password
+Username: rubaiyad
+Pssword: asd@123
 
 
 
