@@ -69,7 +69,8 @@ namespace AttendanceSystem.Tasks
             List<Attendance> attendances = db.Attendances.ToList();
             foreach(Attendance att in attendances)
             {
-                if(att.CourseId == course.Id && att.StudentId == student.Id)
+                TimeSpan difference = att.Time.Subtract(DateTime.Now);
+                if(att.CourseId == course.Id && att.StudentId == student.Id && difference.Hours < 24)
                 {
                     isDuplicate = true;
                     break;
