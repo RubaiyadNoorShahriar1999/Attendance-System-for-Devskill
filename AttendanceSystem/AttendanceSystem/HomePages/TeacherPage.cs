@@ -17,13 +17,15 @@ namespace AttendanceSystem.HomePages
 
                 Console.WriteLine("\n\t\t\t\tWelcome to your Portal: " + teacher.Name);
                 Console.Write("Services:\n1. See attendance list of all students\n2. See attendance of students course wise\n3. See attendance of students Student ID wise\n4. View my courses\n5. Logout\nEnter option: ");
-
                 int choice = int.Parse(Console.ReadLine());
 
                 if (choice == 1)
                 {
                     Attendance attendance = new Attendance();
-                    bool entity = new TeacherServices().ShowAttendanceOfAllStudents(attendance);
+                    Course course = new Course();
+                    Console.Write("Please re-enter your Teacher ID: ");
+                    int ID = int.Parse(Console.ReadLine());
+                    new TeacherServices().ShowAttendanceOfAllStudents(attendance,ID);
                 }
                 else if (choice == 2)
                 {

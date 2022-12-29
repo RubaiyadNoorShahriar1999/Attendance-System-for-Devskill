@@ -45,6 +45,46 @@ namespace AttendanceSystem.Tasks
            return db.Courses.Find(id);
         }
 
+        public bool CheckIfExist(Student student,Course course)
+        {
+            int i = 0;
+            List<CourseStudent> cs = db.CourseStudents.Where(x => x.CourseId == course.Id).ToList();
+            foreach (CourseStudent c in cs)
+            {
+                if (c.StudentId == student.Id)
+                    i++;
+            }
+            if(i == 0)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+        public bool IsDuplicate(Student student, Course course)
+        {
+            bool isDuplicate = false;   
+            List<Attendance> attendances = db.Attendances.ToList();
+            foreach(Attendance att in attendances)
+            {
+                if(att.CourseId == course.Id && att.StudentId == student.Id)
+                {
+                    isDuplicate = true;
+                    break;
+                }
+                else
+                {
+                    isDuplicate = false;
+                }
+            }
+            if(isDuplicate)
+            { return true; }
+            else
+            { return false; }
+        }
+
         public List<Course> Read()
         {
             throw new NotImplementedException();

@@ -31,16 +31,16 @@ namespace AttendanceSystem.HomePages
                     {
                         Teacher teacher = new Teacher();
                         Console.Write("Enter Teacher name: ");
-                        teacher.Name = Console.ReadLine();
+                        teacher.Name = Console.ReadLine().Replace(@"\s", "");
                         Console.Write("Enter User name: ");
-                        teacher.UserName = Console.ReadLine();
+                        teacher.UserName = Console.ReadLine().Replace(@"\s", "");
                         Console.Write("Enter Password: ");
                         teacher.Password = Console.ReadLine();
                         teacher.AdminId = admin.Id;
                         Teacher entity = new TeacherServices().Create(teacher);
                         if (entity != null)
                         {
-                            Console.Write("Successful, ");
+                            Console.Write("Successfully added the teacher.");
                             Console.WriteLine("Teacher ID: " + entity.Id.ToString());
                         }
                         else
@@ -79,7 +79,7 @@ namespace AttendanceSystem.HomePages
                         var isDeleted = new TeacherServices().Delete(tid);
                         if (isDeleted)
                         {
-                            Console.WriteLine("Successful");
+                            Console.WriteLine("Successfully deleted the teacher");
                         }
                         else
                         {
@@ -98,9 +98,9 @@ namespace AttendanceSystem.HomePages
                     {
                         Student student = new Student();
                         Console.Write("Enter Student name: ");
-                        student.Name = Console.ReadLine();
+                        student.Name = Console.ReadLine().Replace(@"\s", "");
                         Console.Write("Enter User name: ");
-                        student.UserName = Console.ReadLine();
+                        student.UserName = Console.ReadLine().Replace(@"\s", "");
                         Console.Write("Enter password: ");
                         student.Password = Console.ReadLine();
                         student.AdminId = admin.Id;
@@ -116,7 +116,7 @@ namespace AttendanceSystem.HomePages
                         Student entity = new StudentServices().Create(student);
                         if (entity != null)
                         {
-                            Console.WriteLine("Successfully added student ");
+                            Console.WriteLine("Successfully added student.");
                             Console.WriteLine("Student ID: " + entity.Id.ToString());
                         }
                         else
@@ -151,7 +151,7 @@ namespace AttendanceSystem.HomePages
                             bool entity = new StudentServices().Delete(ID);
                             if (entity != false)
                             {
-                                Console.Write("Successful");
+                                Console.Write("Successfully deleted the student.");
                                 Console.WriteLine("Student ID: " + ID + " successfully deleted");
                             }
                             else
@@ -174,7 +174,7 @@ namespace AttendanceSystem.HomePages
                     {
                         Course course = new Course();
                         Console.Write("Enter Course name: ");
-                        course.CourseName = Console.ReadLine();
+                        course.CourseName = Console.ReadLine().Replace(@"\s", "");
                         Console.Write("Enter course fees: ");
                         course.Fees = double.Parse(Console.ReadLine());
                         Console.Write("Enter class start date (ex. 2/2/2022): ");
@@ -200,7 +200,7 @@ namespace AttendanceSystem.HomePages
                         Course entity = new CourseServices().Create(course);
                         if (entity != null)
                         {
-                            Console.WriteLine("Successful, ");
+                            Console.WriteLine("Successfully added the course.");
                             Console.WriteLine("Course ID: " + entity.Id.ToString());
                         }
                         else
@@ -217,22 +217,10 @@ namespace AttendanceSystem.HomePages
                             Console.WriteLine("Course does not exist");
                         else
                         {
-                            Console.WriteLine("Enter ID of the Alternative Teacher: ");
-                            int backupTeacherID = int.Parse(Console.ReadLine());
-                            Teacher isTeacherExist = new TeacherServices().Get(backupTeacherID);
-                            if (isTeacherExist == null)
-                            {
-                                Console.WriteLine("Teacher does not exist");
-                                return;
-                            }
-                            else
-                            {
-                                course.TeacherId = isTeacherExist.Id;
-                            }
                             bool entity = new CourseServices().Delete(ID);
                             if (entity != false)
                             {
-                                Console.Write("Successful, ");
+                                Console.Write("Successfully deleted the course.");
                                 Console.WriteLine("Course ID: " + ID + " successfully deleted");
                             }
                             else

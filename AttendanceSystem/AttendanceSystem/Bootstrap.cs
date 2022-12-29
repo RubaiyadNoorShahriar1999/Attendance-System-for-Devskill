@@ -27,7 +27,7 @@ namespace AttendanceSystem
                 {
                     case 1:
                         Console.WriteLine();
-                        Console.Write("\nEnter User Name: ");
+                        Console.Write("Enter User Name: ");
                         userName = Console.ReadLine();
                         Console.Write("Enter Password: ");
                         password = Console.ReadLine();
@@ -49,7 +49,7 @@ namespace AttendanceSystem
 
                     case 2:
                         Console.WriteLine();
-                        Console.Write("\nEnter User Name: ");
+                        Console.Write("Enter User Name: ");
                         userName = Console.ReadLine();
                         Console.Write("Enter Password: ");
                         password = Console.ReadLine();
@@ -71,7 +71,7 @@ namespace AttendanceSystem
 
                     case 3:
                         Console.WriteLine();
-                        Console.Write("\nEnter User Name: ");
+                        Console.Write("Enter User Name: ");
                         userName = Console.ReadLine();
                         Console.Write("Enter Password: ");
                         password = Console.ReadLine();

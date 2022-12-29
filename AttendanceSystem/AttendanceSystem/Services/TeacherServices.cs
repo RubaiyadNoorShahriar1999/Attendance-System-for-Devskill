@@ -51,25 +51,31 @@ namespace AttendanceSystem.Tasks
             
             return true;
         }*/
-        public bool ShowAttendanceOfAllStudents(Attendance attendance)
+        public void ShowAttendanceOfAllStudents(Attendance attendance, int ID)
         {
-            List<Attendance> attendances = db.Attendances.ToList();
-            foreach (Attendance a in attendances)
+            List<Course> courses = db.Courses.ToList();
+            foreach(Course x in courses)
             {
-                Course course = db.Courses.Where(x => x.Id == a.CourseId).FirstOrDefault();
-                Student student = db.Students.Where(x => x.Id == a.StudentId).FirstOrDefault();
-                Console.Write("Student Name: " + student.Name + " Course Name: " + course.CourseName);
-                if (a.Present.ToLower() == "present")
+                if(x.TeacherId == ID)
                 {
-                    Console.Write(" Present: " + ((char)0x221A).ToString() + " ");
+                    List<Attendance> attendances = db.Attendances.Where(c => c.CourseId == x.Id).ToList();
+                    foreach (Attendance a in attendances)
+                    {
+                        Course course = db.Courses.Where(x => x.Id == a.CourseId).FirstOrDefault();
+                        Student student = db.Students.Where(x => x.Id == a.StudentId).FirstOrDefault();
+                        Console.Write("Student Name: " + student.Name + " Course Name: " + course.CourseName);
+                        if (a.Present.ToLower() == "present")
+                        {
+                            Console.Write(" Present: " + ((char)0x221A).ToString() + " ");
+                        }
+                        else
+                        {
+                            Console.Write(" Present: x ");
+                        }
+                        Console.WriteLine("Time of attendance: " + a.Time);
+                    }
                 }
-                else
-                {
-                    Console.Write(" Present: x ");
-                }
-                Console.WriteLine("Time of attendance: " + a.Time);
             }
-            return true;
         }
         public bool ShowAttendanceByCourse(Attendance attendance)
         {

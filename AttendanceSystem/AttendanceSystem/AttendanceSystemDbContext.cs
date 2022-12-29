@@ -155,13 +155,13 @@ namespace AttendanceSystem
                         .HasOne(x => x.Course)
                         .WithMany(y => y.Attendances)
                         .HasForeignKey(z => z.CourseId)
-                        .OnDelete(DeleteBehavior.NoAction);
+                        .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<Attendance>()
                         .HasOne(x => x.Student)
                         .WithMany(y => y.Attendances)
                         .HasForeignKey(z => z.StudentId)
-                        .OnDelete(DeleteBehavior.NoAction);
+                        .OnDelete(DeleteBehavior.Cascade);
 
             #endregion
 
@@ -174,19 +174,19 @@ namespace AttendanceSystem
                         .HasOne(x => x.Course)
                         .WithMany(y => y.Schedules)
                         .HasForeignKey(z => z.CourseId)
-                        .OnDelete(DeleteBehavior.NoAction);
+                        .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<Schedule>()
                         .HasOne(x => x.Teacher)
                         .WithMany(y => y.Schedules)
                         .HasForeignKey(z => z.TeacherId)
-                        .OnDelete(DeleteBehavior.NoAction);
+                        .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<Schedule>()
                         .HasOne(x => x.Student)
                         .WithMany(y => y.Schedules)
                         .HasForeignKey(z => z.StudentId)
-                        .OnDelete(DeleteBehavior.NoAction);
+                        .OnDelete(DeleteBehavior.Cascade);
             #endregion
 
             base.OnModelCreating(modelBuilder);
