@@ -77,46 +77,47 @@ namespace AttendanceSystem.Tasks
             return db.SaveChanges() > 0;
         }
 
-        public void ShowAttendanceAll(Attendance attendance)
+        public bool ShowAttendanceAll(Attendance attendance)
         {
             List<Attendance> entity = db.Attendances.Where(x => x.StudentId == attendance.StudentId).ToList();
-            foreach(Attendance at in entity)
+            foreach (Attendance at in entity)
             {
-                Console.Write("Student ID: "+at.StudentId +" Course ID: " + at.CourseId +" Time: "+at.Time );
+                Console.Write("Student ID: " + at.StudentId + " Course ID: " + at.CourseId + " Time: " + at.Time);
                 if (at.Present.ToLower() == "present")
                 {
                     Console.WriteLine(" Present: " + ((char)0x221A).ToString() + "\n");
                 }
-                else 
+                else
                 {
                     Console.WriteLine(" Present: x\n");
                 }
             }
+            return true;
         }
 
         public void ShowAllAttendanceOfCourse(Attendance attendance)
         {
-            List<Attendance> entity = db.Attendances.Where(y => y.CourseId == attendance.CourseId).ToList();
-            foreach(Attendance a in entity)
-            {
-                if(a.StudentId == attendance.StudentId)
-                {
+            List<Attendance> entity = db.Attendances.Where(y => y.StudentId == attendance.StudentId).ToList();
+
                     Course course = db.Courses.Where(x => x.Id == attendance.CourseId).FirstOrDefault();
                     Student student = db.Students.Where(x => x.Id == attendance.StudentId).FirstOrDefault();
                     foreach (Attendance at in entity)
                     {
-                        Console.Write("Student ID: " + student.Id + " Course ID: " + course.Id + " Time: " + at.Time);
-                        if (at.Present.ToLower() == "present")
+                        if (at.CourseId == attendance.CourseId)
                         {
-                            Console.WriteLine(" Present: " + ((char)0x221A).ToString() + "\n");
-                        }
-                        else
-                        {
-                            Console.WriteLine(" Present: x\n");
+                            Console.Write("Student ID: " + student.Id + " Course ID: " + course.Id + " Time: " + at.Time);
+                            if (at.Present.ToLower() == "present")
+                            {
+                                Console.WriteLine(" Present: " + ((char)0x221A).ToString() + "\n");
+                            }
+                            else
+                            {
+                                Console.WriteLine(" Present: x\n");
+                            }
                         }
                     }
-                }
-            }
+                
+            
         }
     }
     }

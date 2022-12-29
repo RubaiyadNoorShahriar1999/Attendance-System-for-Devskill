@@ -19,7 +19,7 @@ namespace AttendanceSystem
                 string userName = "";
                 string password = "";
 
-                Console.Write("Options: ");
+                Console.Write("Login Options: ");
                 Console.Write("\n1. Admin Login\n2. Teacher Login\n3. Student Login\nEnter option: ");
                 choice = int.Parse(Console.ReadLine());
 

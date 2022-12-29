@@ -13,10 +13,8 @@ namespace AttendanceSystem.Models
         public string CourseName { get; set; }
         public double Fees { get; set; }
         public DateTime ClassStartDate { get; set; }
-/*        public DateTime ClassEndDate { get; set; }*/
         public string ClassTime { get; set; }
         public int NoOfClasses { get; set; }
-/*        public TimeSpan CourseTotalDays { get; set; }*/
         public Admin Admin { get; set; }
         public Teacher Teacher { get; set; }
         public List<CourseStudent> CourseStudents { get; set; }

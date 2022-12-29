@@ -61,7 +61,7 @@ namespace AttendanceSystem.HomePages
                 }
                 else if (choice == 2)
                 {
-                    Console.WriteLine("\nChoose an option: 1. Attendance of all courses 2. Attendance of a particular course (Not complete)");
+                    Console.WriteLine("\nChoose an option: 1. Attendance of all courses 2. Attendance of a particular course");
                     Console.Write("Enter your choice: ");
                     int choice1 = int.Parse(Console.ReadLine());
                     #region Duplication check
@@ -73,7 +73,7 @@ namespace AttendanceSystem.HomePages
                         Attendance at1 = new Attendance();
                         Console.Write("Enter your Student ID: ");
                         at1.StudentId = int.Parse(Console.ReadLine());
-                        new StudentServices().ShowAttendanceAll(at1);
+                        bool show = new StudentServices().ShowAttendanceAll(at1);
                     }
                     else if (choice == 2)
                     {
