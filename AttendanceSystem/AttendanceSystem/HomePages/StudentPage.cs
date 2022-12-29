@@ -22,8 +22,8 @@ namespace AttendanceSystem.HomePages
 
                 if (choice == 1)
                 {
-                    Student st = new Student();
                     Course c = new Course();
+                    Student st = new Student();
                     Attendance at = new Attendance();
                     st.Id = student.Id;
                     Console.Write("Enter the Course ID you want to give attendance: ");

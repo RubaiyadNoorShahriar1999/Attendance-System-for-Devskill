@@ -63,6 +63,40 @@ namespace AttendanceSystem.Tasks
                 return true;
             }
         }
+
+   /*     public bool IsCourseValid(Course course)
+        {
+            bool isTrue = false;
+            List<Course> courses = db.Courses.ToList();
+            foreach(Course x in courses)
+            {
+                if(x.Id== course.Id)
+                {
+                    TimeSpan courseEndCheck = DateTime.Now.Subtract(x.ClassEndDate);
+                    TimeSpan courseStartCheck = x.ClassStartDate.Subtract(DateTime.Now);
+
+                    if (courseStartCheck.Hours > 0)
+                    {
+                        Console.WriteLine("Sorry the course hasn't started yet. Try giving attendance after the course starts.");
+                        isTrue = false;
+                        break;
+                        
+                    }
+                    else if (courseEndCheck.Hours > 0 || courseEndCheck.Hours == 0)
+                    {
+                        Console.WriteLine("Sorry the course has already ended. You can not give attendance.");
+                        isTrue = false;
+                        break;
+                    }
+                    else
+                    {
+                        isTrue= true;
+                    }
+                }
+            }
+            return isTrue;
+
+        }*/
         public bool IsDuplicate(Student student, Course course)
         {
             bool isDuplicate = false;   

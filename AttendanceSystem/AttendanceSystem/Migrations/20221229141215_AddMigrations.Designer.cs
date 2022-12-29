@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AttendanceSystem.Migrations
 {
     [DbContext(typeof(AttendanceSystemDbContext))]
-    [Migration("20221229075343_AddMigrations")]
+    [Migration("20221229141215_AddMigrations")]
     partial class AddMigrations
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

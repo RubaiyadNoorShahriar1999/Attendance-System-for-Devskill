@@ -177,12 +177,15 @@ namespace AttendanceSystem.HomePages
                         course.CourseName = Console.ReadLine().Replace(@"\s", "");
                         Console.Write("Enter course fees: ");
                         course.Fees = double.Parse(Console.ReadLine());
-                        Console.Write("Enter class start date (ex. 2/2/2022): ");
+                        Console.Write("Enter class start date (ex. Month/Day/Year - 12/29/2022): ");
                         course.ClassStartDate = DateTime.Parse(Console.ReadLine());
+                        /*                        Console.Write("Enter class End date (ex. Month/Day/Year - 12/29/2022): ");*/
+                        /*                        course.ClassEndDate = DateTime.Parse(Console.ReadLine());*/
                         Console.Write("Enter class time (ex. Monday 8PM-11PM,Thursday 8PM-11PM): ");
                         course.ClassTime = Console.ReadLine().Replace(@"\s", "");
                         Console.Write("Enter number of classes: ");
                         course.NoOfClasses = int.Parse(Console.ReadLine());
+/*                        course.CourseTotalDays = course.ClassStartDate.Subtract(course.ClassEndDate);*/
                         course.AdminId = admin.Id;
                         Console.Write("Enter Teacher ID (You need to assign a teacher to your created course): ");
                         int teacherfk = int.Parse(Console.ReadLine());
@@ -190,7 +193,7 @@ namespace AttendanceSystem.HomePages
                         if (isTeacherExist == null)
                         {
                             Console.WriteLine("Teacher does not exist");
-                            return;
+                            return; 
                         }
                         else
                         {
@@ -207,6 +210,7 @@ namespace AttendanceSystem.HomePages
                         {
                             Console.WriteLine("Failed");
                         }
+
                     }
                     else if (addOrDelete == 2)
                     {
