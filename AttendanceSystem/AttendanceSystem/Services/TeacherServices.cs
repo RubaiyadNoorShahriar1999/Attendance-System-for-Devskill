@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -80,11 +81,9 @@ namespace AttendanceSystem.Tasks
         }
         public bool ShowAttendanceByCourse(Attendance attendance)
         {
-            List<Attendance> attendances = db.Attendances.ToList();
+            List<Attendance> attendances = db.Attendances.Where(x => x.CourseId ==  attendance.CourseId).ToList();
             foreach (Attendance a in attendances)
             {
-                if(a.CourseId == attendance.CourseId)
-                {
                     Course course = db.Courses.Where(x => x.Id == a.CourseId).FirstOrDefault();
                     Student student = db.Students.Where(x => x.Id == a.StudentId).FirstOrDefault();
                     Console.Write("Course Name: " + course.CourseName + " Student Name: " + student.Name);
@@ -97,13 +96,18 @@ namespace AttendanceSystem.Tasks
                         Console.Write(" Present: x ");
                     }
                     Console.WriteLine("Time of attendance: " + a.Time);
-                }
             }
-            return true;
+            if (attendances.Count == 0)
+            {
+                return false;
+            }
+            else
+                return true;
         }
 
         public bool ShowAttendanceByStudentID(Attendance attendance, Teacher teacher)
         {
+            int count = 0;
             List <Course> courses = db.Courses.Where(x => x.TeacherId == teacher.Id).ToList();
             foreach (Course course in courses)
             {
@@ -123,10 +127,16 @@ namespace AttendanceSystem.Tasks
                             Console.Write(" Present: x ");
                         }
                         Console.WriteLine("Time of attendance: " + at.Time);
+                        count++;
                     }
                 }
             }
-            return true;
+            if(count == 0)
+            {
+                return false;
+            }
+            else
+                return true;
         }
 
         public bool ViewCourses(Course course)

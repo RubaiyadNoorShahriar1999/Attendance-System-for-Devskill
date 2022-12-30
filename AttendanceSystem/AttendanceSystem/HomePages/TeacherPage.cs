@@ -23,8 +23,7 @@ namespace AttendanceSystem.HomePages
                 {
                     Attendance attendance = new Attendance();
                     Course course = new Course();
-                    Console.Write("Please re-enter your Teacher ID: ");
-                    int ID = int.Parse(Console.ReadLine());
+                    int ID = teacher.Id;
                     new TeacherServices().ShowAttendanceOfAllStudents(attendance,ID);
                 }
                 else if (choice == 2)
@@ -33,6 +32,10 @@ namespace AttendanceSystem.HomePages
                     Console.Write("Enter Course ID: ");
                     attendance.CourseId = int.Parse(Console.ReadLine());
                     bool entity = new TeacherServices().ShowAttendanceByCourse(attendance);
+                    if (!entity)
+                    {
+                        Console.WriteLine("Sorry there is no reccord of the course");
+                    }
                 }
                 else if (choice == 3)
                 {
@@ -40,6 +43,10 @@ namespace AttendanceSystem.HomePages
                     Console.Write("Enter Student ID: ");
                     attendance.StudentId = int.Parse(Console.ReadLine());
                     bool entity = new TeacherServices().ShowAttendanceByStudentID(attendance,teacher);
+                    if(!entity)
+                    {
+                        Console.WriteLine("Sorry there is no reccord of the student");
+                    }
                 }
                 else if (choice == 4)
                 {
