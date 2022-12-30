@@ -8250,11 +8250,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Hridoy\\Desktop\\AttendanceSystem\\AttendanceSystem\\AttendanceSystem.csproj",
+      "projectUniqueName": "D:\\Attendance-System-for-Devskill\\AttendanceSystem\\AttendanceSystem\\AttendanceSystem.csproj",
       "projectName": "AttendanceSystem",
-      "projectPath": "C:\\Users\\Hridoy\\Desktop\\AttendanceSystem\\AttendanceSystem\\AttendanceSystem.csproj",
+      "projectPath": "D:\\Attendance-System-for-Devskill\\AttendanceSystem\\AttendanceSystem\\AttendanceSystem.csproj",
       "packagesPath": "C:\\Users\\Hridoy\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Hridoy\\Desktop\\AttendanceSystem\\AttendanceSystem\\obj\\",
+      "outputPath": "D:\\Attendance-System-for-Devskill\\AttendanceSystem\\AttendanceSystem\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Hridoy\\AppData\\Roaming\\NuGet\\NuGet.Config",

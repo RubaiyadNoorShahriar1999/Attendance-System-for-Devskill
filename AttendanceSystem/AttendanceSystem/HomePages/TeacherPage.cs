@@ -39,7 +39,7 @@ namespace AttendanceSystem.HomePages
                     Attendance attendance = new Attendance();
                     Console.Write("Enter Student ID: ");
                     attendance.StudentId = int.Parse(Console.ReadLine());
-                    bool entity = new TeacherServices().ShowAttendanceByStudentID(attendance);
+                    bool entity = new TeacherServices().ShowAttendanceByStudentID(attendance,teacher);
                 }
                 else if (choice == 4)
                 {
