@@ -107,6 +107,19 @@ namespace AttendanceSystem.Tasks
             }
         }
 
+        public void ViewCourseSchedule(Student student)
+        {
+            List<Schedule> schedules = db.Schedules.Where(x => x.StudentId == student.Id).ToList();
+            foreach(Schedule schedule in schedules)
+            {
+                Console.WriteLine("Course ID: "+ schedule.CourseId + "  Class Time: "+ schedule.ClassTime);
+            }
+
+            if(schedules.Count == 0) 
+            {
+                Console.WriteLine("You are not enrolled in any course");
+            }
+        }
         public List<Student> GetStudentByTeacherId(int id)
         {
             return db.Students.Where(s => s.TeacherId == id).ToList();
@@ -114,12 +127,12 @@ namespace AttendanceSystem.Tasks
 
         public bool GiveAttendance(Student student,Course course,Attendance attendance)
         {
-            Attendance obj = new Attendance();
-            obj.CourseId = course.Id;
-            obj.StudentId = student.Id;
-            obj.Present = attendance.Present;
-            obj.Time = attendance.Time;
-            db.Attendances.Add(obj);
+            Attendance attendance1 = new Attendance();
+            attendance1.CourseId = course.Id;
+            attendance1.StudentId = student.Id;
+            attendance1.Present = attendance.Present;
+            attendance1.Time = attendance.Time;
+            db.Attendances.Add(attendance1);
             return db.SaveChanges() > 0;
         }
 

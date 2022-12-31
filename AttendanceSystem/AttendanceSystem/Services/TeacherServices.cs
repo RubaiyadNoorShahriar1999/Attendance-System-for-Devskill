@@ -62,18 +62,18 @@ namespace AttendanceSystem.Tasks
             List<Attendance> attendances = db.Attendances.Where(x => x.CourseId ==  attendance.CourseId).ToList();
             foreach (Attendance a in attendances)
             {
-                    Course course = db.Courses.Where(x => x.Id == a.CourseId).FirstOrDefault();
-                    Student student = db.Students.Where(x => x.Id == a.StudentId).FirstOrDefault();
-                    Console.Write("Course Name: " + course.CourseName + " Student Name: " + student.Name);
-                    if (a.Present.ToLower() == "present")
-                    {
-                        Console.Write(" Present: " + ((char)0x221A).ToString() + " ");
-                    }
-                    else
-                    {
-                        Console.Write(" Present: x ");
-                    }
-                    Console.WriteLine("Time of attendance: " + a.Time);
+                Course course = db.Courses.Where(x => x.Id == a.CourseId).FirstOrDefault();
+                Student student = db.Students.Where(x => x.Id == a.StudentId).FirstOrDefault();
+                Console.Write("Course Name: " + course.CourseName + " Student Name: " + student.Name);
+                if (a.Present.ToLower() == "present")
+                {
+                    Console.Write(" Present: " + ((char)0x221A).ToString() + " ");
+                }
+                else
+                {
+                    Console.Write(" Present: x ");
+                }
+                Console.WriteLine("Time of attendance: " + a.Time);
             }
             if (attendances.Count == 0)
             {
@@ -117,15 +117,15 @@ namespace AttendanceSystem.Tasks
                 return true;
         }
 
-        public bool ViewCourses(Course course)
+        public void ViewCourses(Course course)
         {
             List<Course> courses = db.Courses.Where(x => x.TeacherId== course.TeacherId).ToList();
             foreach (Course a in courses)
             {
                 Console.WriteLine("Course name: " + a.CourseName + " Course ID: "+a.Id);
             }
-            return true;
         }
+
         public Teacher Get(int id)
         {
             return db.Teachers.Find(id);
@@ -136,6 +136,19 @@ namespace AttendanceSystem.Tasks
             return db.Teachers.ToList();
         }
 
+        public void ViewCourseSchedule(Teacher teacher)
+        {
+            List<Schedule> schedules = db.Schedules.Where(x => x.TeacherId == teacher.Id).ToList();
+            foreach (Schedule schedule in schedules)
+            {
+                Console.WriteLine("Course ID: " + schedule.CourseId + "  Class Time: " + schedule.ClassTime);
+            }
+
+            if (schedules.Count == 0)
+            {
+                Console.WriteLine("You are not assigned in any course");
+            }
+        }
         public bool Update(Teacher type)
         {
             Teacher teacher = db.Teachers.Where(x => x.Id== type.Id).FirstOrDefault();

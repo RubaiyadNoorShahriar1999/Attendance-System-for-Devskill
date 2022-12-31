@@ -16,7 +16,7 @@ namespace AttendanceSystem.HomePages
             {
                 int i = 0;
                 Console.WriteLine("\n\t\t\t\tWelcome to your Portal: " + teacher.Name);
-                Console.Write("Services:\n1. See attendance list of all students\n2. See attendance of students course wise\n3. See attendance of students Student ID wise\n4. View my courses\n5. Update profile\n6. Logout\nEnter option: ");
+                Console.Write("Services:\n1. See attendance list of all students\n2. See attendance of students course wise\n3. See attendance of students Student ID wise\n4. View my courses\n5. View course schedule\n6. Update profile\n7. Logout\nEnter option: ");
                 int choice = int.Parse(Console.ReadLine().Replace(@"\s", ""));
 
                 if (choice == 1)
@@ -51,11 +51,16 @@ namespace AttendanceSystem.HomePages
                 else if (choice == 4)
                 {
                     Course course = new Course();
-                    Console.Write("Please re-enter your Teacher ID: ");
-                    course.TeacherId = int.Parse(Console.ReadLine().Replace(@"\s", ""));
-                    bool c = new TeacherServices().ViewCourses(course);
+                    course.TeacherId = teacher.Id;
+                    new TeacherServices().ViewCourses(course);
                 }
-                else if(choice == 5)
+                else if (choice == 5)
+                {
+                    Teacher teacher1 = new Teacher();
+                    teacher1.Id = teacher.Id;
+                    new TeacherServices().ViewCourseSchedule(teacher1);
+                }
+                else if (choice == 6)
                 {
                     Teacher teacher1 = new Teacher();
                     teacher1.Id = teacher.Id;
@@ -75,7 +80,7 @@ namespace AttendanceSystem.HomePages
                         Console.WriteLine("You need to re-login for further update.");
                     }
                 }
-                else if (choice == 6)
+                else if (choice == 7)
                 {
                     break;
                 }
