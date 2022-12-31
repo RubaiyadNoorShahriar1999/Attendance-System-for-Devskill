@@ -77,7 +77,7 @@ namespace AttendanceSystem.Tasks
             return db.SaveChanges() > 0;
         }
 
-        public bool ShowAttendanceAll(Attendance attendance)
+        public void ShowAttendanceAll(Attendance attendance)
         {
             List<Attendance> entity = db.Attendances.Where(x => x.StudentId == attendance.StudentId).ToList();
             foreach (Attendance at in entity)
@@ -92,32 +92,37 @@ namespace AttendanceSystem.Tasks
                     Console.WriteLine(" Present: x\n");
                 }
             }
-            return true;
+            if (entity.Count == 0)
+            {
+                Console.WriteLine("You don't have any attendance record");
+            }
         }
 
         public void ShowAllAttendanceOfCourse(Attendance attendance)
         {
             List<Attendance> entity = db.Attendances.Where(y => y.StudentId == attendance.StudentId).ToList();
 
-                    Course course = db.Courses.Where(x => x.Id == attendance.CourseId).FirstOrDefault();
-                    Student student = db.Students.Where(x => x.Id == attendance.StudentId).FirstOrDefault();
-                    foreach (Attendance at in entity)
+            Course course = db.Courses.Where(x => x.Id == attendance.CourseId).FirstOrDefault();
+            Student student = db.Students.Where(x => x.Id == attendance.StudentId).FirstOrDefault();
+            foreach (Attendance at in entity)
+            {
+                if (at.CourseId == attendance.CourseId)
+                {
+                    Console.Write("Student ID: " + student.Id + " Course ID: " + course.Id + " Time: " + at.Time);
+                    if (at.Present.ToLower() == "present")
                     {
-                        if (at.CourseId == attendance.CourseId)
-                        {
-                            Console.Write("Student ID: " + student.Id + " Course ID: " + course.Id + " Time: " + at.Time);
-                            if (at.Present.ToLower() == "present")
-                            {
-                                Console.WriteLine(" Present: " + ((char)0x221A).ToString() + "\n");
-                            }
-                            else
-                            {
-                                Console.WriteLine(" Present: x\n");
-                            }
-                        }
+                        Console.WriteLine(" Present: " + ((char)0x221A).ToString() + "\n");
                     }
-                
-            
+                    else
+                    {
+                        Console.WriteLine(" Present: x\n");
+                    }
+                }
+            }
+            if(entity.Count == 0)
+            {
+                Console.WriteLine("You don't have any attendance record");
+            }           
         }
     }
     }

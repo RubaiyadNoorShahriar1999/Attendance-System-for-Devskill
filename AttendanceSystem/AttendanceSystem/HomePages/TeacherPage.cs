@@ -17,7 +17,7 @@ namespace AttendanceSystem.HomePages
 
                 Console.WriteLine("\n\t\t\t\tWelcome to your Portal: " + teacher.Name);
                 Console.Write("Services:\n1. See attendance list of all students\n2. See attendance of students course wise\n3. See attendance of students Student ID wise\n4. View my courses\n5. Logout\nEnter option: ");
-                int choice = int.Parse(Console.ReadLine());
+                int choice = int.Parse(Console.ReadLine().Replace(@"\s", ""));
 
                 if (choice == 1)
                 {
@@ -30,7 +30,7 @@ namespace AttendanceSystem.HomePages
                 {
                     Attendance attendance = new Attendance();
                     Console.Write("Enter Course ID: ");
-                    attendance.CourseId = int.Parse(Console.ReadLine());
+                    attendance.CourseId = int.Parse(Console.ReadLine().Replace(@"\s", ""));
                     bool entity = new TeacherServices().ShowAttendanceByCourse(attendance);
                     if (!entity)
                     {
@@ -41,7 +41,7 @@ namespace AttendanceSystem.HomePages
                 {
                     Attendance attendance = new Attendance();
                     Console.Write("Enter Student ID: ");
-                    attendance.StudentId = int.Parse(Console.ReadLine());
+                    attendance.StudentId = int.Parse(Console.ReadLine().Replace(@"\s", ""));
                     bool entity = new TeacherServices().ShowAttendanceByStudentID(attendance,teacher);
                     if(!entity)
                     {
@@ -52,7 +52,7 @@ namespace AttendanceSystem.HomePages
                 {
                     Course course = new Course();
                     Console.Write("Please re-enter your Teacher ID: ");
-                    course.TeacherId = int.Parse(Console.ReadLine());
+                    course.TeacherId = int.Parse(Console.ReadLine().Replace(@"\s", ""));
                     bool c = new TeacherServices().ViewCourses(course);
                 }
                 else if (choice == 5)

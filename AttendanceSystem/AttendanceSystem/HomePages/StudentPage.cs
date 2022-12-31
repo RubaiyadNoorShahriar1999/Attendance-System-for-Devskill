@@ -18,7 +18,7 @@ namespace AttendanceSystem.HomePages
                 Console.WriteLine("\n\t\t\t\tWelcome to your Student Portal " + student.Name);
                 Console.Write("Services:\n1. Give your Attendance\n2. View your attendance sheet\n3. Logout\nEnter option: ");
                 
-                int choice = int.Parse(Console.ReadLine());
+                int choice = int.Parse(Console.ReadLine().Replace(@"\s", ""));
 
                 if (choice == 1)
                 {
@@ -27,7 +27,7 @@ namespace AttendanceSystem.HomePages
                     Attendance at = new Attendance();
                     st.Id = student.Id;
                     Console.Write("Enter the Course ID you want to give attendance: ");
-                    c.Id = int.Parse(Console.ReadLine());
+                    c.Id = int.Parse(Console.ReadLine().Replace(@"\s", ""));
                     bool isExist = new CourseServices().CheckIfExist(st,c);
                     if (isExist)
                     {
@@ -39,7 +39,7 @@ namespace AttendanceSystem.HomePages
                         else
                         {
                             Console.Write("Write Present (Caution: Anything other then \"Present\" may result in \"Not Presesnt\"): ");
-                            at.Present = Console.ReadLine();
+                            at.Present = Console.ReadLine().Replace(@"\s", "");
                             at.Time = DateTime.Now;
                             bool entity = new StudentServices().GiveAttendance(st, c, at);
 
@@ -63,25 +63,21 @@ namespace AttendanceSystem.HomePages
                 {
                     Console.WriteLine("\nChoose an option: 1. Attendance of all courses 2. Attendance of a particular course");
                     Console.Write("Enter your choice: ");
-                    int choice1 = int.Parse(Console.ReadLine());
-                    #region Duplication check
-
-                    #endregion
+                    int choice1 = int.Parse(Console.ReadLine().Replace(@"\s", ""));
 
                     if (choice1 == 1)
                     {
                         Attendance at1 = new Attendance();
                         Console.Write("Enter your Student ID: ");
-                        at1.StudentId = int.Parse(Console.ReadLine());
-                        bool show = new StudentServices().ShowAttendanceAll(at1);
+                        at1.StudentId = int.Parse(Console.ReadLine().Replace(@"\s", ""));
+                        new StudentServices().ShowAttendanceAll(at1);
                     }
                     else if (choice == 2)
                     {
                         Attendance at2 = new Attendance();
-                        Console.Write("Enter your Student ID: ");
-                        at2.StudentId = int.Parse(Console.ReadLine());
+                        at2.StudentId = student.Id;
                         Console.Write("Enter your Course ID: ");
-                        at2.CourseId = int.Parse(Console.ReadLine());
+                        at2.CourseId = int.Parse(Console.ReadLine().Replace(@"\s", ""));
                         new StudentServices().ShowAllAttendanceOfCourse(at2);
                     }
                     else

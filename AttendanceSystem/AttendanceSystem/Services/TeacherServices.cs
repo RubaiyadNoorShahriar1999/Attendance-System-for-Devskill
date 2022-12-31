@@ -31,28 +31,6 @@ namespace AttendanceSystem.Tasks
             return db.SaveChanges() > 0;
         }
 
-/*        public bool ShowAttendanceOfAStudents(Attendance attendance)
-        {
-            List<Attendance> attendances = db.Attendances.Where(x => x.StudentId == attendance.StudentId).ToList();
-            Course course = db.Courses.Where(x => x.Id == attendance.CourseId).FirstOrDefault();
-            Student student = db.Students.Where(x => x.Id == attendance.StudentId).FirstOrDefault();
-
-            foreach (Attendance a in attendances)
-            {
-                Console.Write("Student Name: "+ student.Name + " Course Name: "+ course.CourseName);
-                if (a.Present.ToLower() == "present")
-                {
-                    Console.WriteLine(" Present: " + ((char)0x221A).ToString()+"\n");
-                }
-                else
-                {
-                    Console.WriteLine(" Present: x\n");
-                }
-
-            }
-            
-            return true;
-        }*/
         public void ShowAttendanceOfAllStudents(Attendance attendance, int ID)
         {
             List<Course> courses = db.Courses.ToList();

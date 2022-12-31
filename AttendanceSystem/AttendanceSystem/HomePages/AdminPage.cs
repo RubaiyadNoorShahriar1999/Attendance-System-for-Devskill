@@ -20,13 +20,13 @@ namespace AttendanceSystem.HomePages
                 Console.WriteLine("\n\t\t\t\tWelcome to the System Admin " + admin.Name);
                 Console.Write("Services:\n1. Create/Delete a Teacher\n2. Create/Delete a Student\n3. Add/Remove a Course\n4. Assign a course to a student\n5. Set class schedule for a course\n6. Logout\nEnter option: ");
 
-                int choice = int.Parse(Console.ReadLine());
+                int choice = int.Parse(Console.ReadLine().Replace(@"\s", ""));
 
                 if (choice == 1)
                 {
                     Console.WriteLine("Services:\n1. Add a Teacher 2. Delete a Teacher");
                     Console.Write("Enter service number: ");
-                    int addOrDelete = int.Parse(Console.ReadLine());
+                    int addOrDelete = int.Parse(Console.ReadLine().Replace(@"\s", ""));
                     if (addOrDelete == 1)
                     {
                         Teacher teacher = new Teacher();
@@ -52,7 +52,7 @@ namespace AttendanceSystem.HomePages
                     else if (addOrDelete == 2)
                     {
                         Console.Write("Enter Teacher ID: ");
-                        int tid = int.Parse(Console.ReadLine());
+                        int tid = int.Parse(Console.ReadLine().Replace(@"\s", ""));
 
                         if (new TeacherServices().Get(tid) == null)
                         {
@@ -93,7 +93,7 @@ namespace AttendanceSystem.HomePages
                 {
                     Console.WriteLine("Services:\n1. Add a Student 2. Delete a Student");
                     Console.Write("Enter service number: ");
-                    int addOrDelete = int.Parse(Console.ReadLine());
+                    int addOrDelete = int.Parse(Console.ReadLine().Replace(@"\s", ""));
                     if (addOrDelete == 1)
                     {
                         Student student = new Student();
@@ -105,7 +105,7 @@ namespace AttendanceSystem.HomePages
                         student.Password = Console.ReadLine();
                         student.AdminId = admin.Id;
                         Console.Write("Enter Teacher ID: ");
-                        int teacherfk = int.Parse(Console.ReadLine());
+                        int teacherfk = int.Parse(Console.ReadLine().Replace(@"\s", ""));
                         Teacher isTeacherExist = new TeacherServices().Get(teacherfk);
                         if (isTeacherExist == null)
                         {
@@ -127,7 +127,7 @@ namespace AttendanceSystem.HomePages
                     else if (addOrDelete == 2)
                     {
                         Console.Write("Insert Student ID: ");
-                        int ID = int.Parse(Console.ReadLine());
+                        int ID = int.Parse(Console.ReadLine().Replace(@"\s", ""));
                         Student student = new StudentServices().Get(ID);
                         if (student == null)
                             Console.WriteLine("Student does not exist");
@@ -136,7 +136,7 @@ namespace AttendanceSystem.HomePages
                             if (student.TeacherId == null)
                             {
                                 Console.Write("Enter a new Teacher ID: ");
-                                int tID = int.Parse(Console.ReadLine());
+                                int tID = int.Parse(Console.ReadLine().Replace(@"\s", ""));
                                 Teacher isTeacherExist = new TeacherServices().Get(tID);
                                 if (isTeacherExist == null)
                                 {
@@ -169,7 +169,7 @@ namespace AttendanceSystem.HomePages
                 {
                     Console.WriteLine("Services:\n1. Add a Course 2. Delete a Course");
                     Console.Write("Enter service number: ");
-                    int addOrDelete = int.Parse(Console.ReadLine());
+                    int addOrDelete = int.Parse(Console.ReadLine().Replace(@"\s", ""));
                     if (addOrDelete == 1)
                     {
                         Course course = new Course();
@@ -188,7 +188,7 @@ namespace AttendanceSystem.HomePages
 /*                        course.CourseTotalDays = course.ClassStartDate.Subtract(course.ClassEndDate);*/
                         course.AdminId = admin.Id;
                         Console.Write("Enter Teacher ID (You need to assign a teacher to your created course): ");
-                        int teacherfk = int.Parse(Console.ReadLine());
+                        int teacherfk = int.Parse(Console.ReadLine().Replace(@"\s", ""));
                         Teacher isTeacherExist = new TeacherServices().Get(teacherfk);
                         if (isTeacherExist == null)
                         {
@@ -215,7 +215,7 @@ namespace AttendanceSystem.HomePages
                     else if (addOrDelete == 2)
                     {
                         Console.Write("Insert Course ID: ");
-                        int ID = int.Parse(Console.ReadLine());
+                        int ID = int.Parse(Console.ReadLine().Replace(@"\s", ""));
                         Course course = new CourseServices().Get(ID);
                         if (course == null)
                             Console.WriteLine("Course does not exist");
@@ -242,9 +242,9 @@ namespace AttendanceSystem.HomePages
                     Student student = new Student();
                     CourseStudent courseStudent = new CourseStudent();
                     Console.Write("Enter Course ID: ");
-                    int courseId = int.Parse(Console.ReadLine());
+                    int courseId = int.Parse(Console.ReadLine().Replace(@"\s", ""));
                     Console.Write("Enter Student ID: ");
-                    int studentId = int.Parse(Console.ReadLine());
+                    int studentId = int.Parse(Console.ReadLine().Replace(@"\s", ""));
                     int i = 0;
 
                     List<CourseStudent> cs = db.CourseStudents.Where(x => x.CourseId == courseId).ToList();
@@ -284,11 +284,11 @@ namespace AttendanceSystem.HomePages
                 {
                     Schedule schedule = new Schedule();
                     Console.Write("Enter Course ID: ");
-                    schedule.CourseId = int.Parse(Console.ReadLine());
+                    schedule.CourseId = int.Parse(Console.ReadLine().Replace(@"\s", ""));
                     Console.Write("Enter Teacher ID: ");
-                    schedule.TeacherId = int.Parse(Console.ReadLine());
+                    schedule.TeacherId = int.Parse(Console.ReadLine().Replace(@"\s", ""));
                     Console.Write("Enter Student ID: ");
-                    schedule.StudentId = int.Parse(Console.ReadLine());
+                    schedule.StudentId = int.Parse(Console.ReadLine().Replace(@"\s", ""));
                     Console.Write("Enter number of classes: ");
                     schedule.NoOfClasses = int.Parse(Console.ReadLine());
                     Console.Write("Enter the class times (ex. Monday 8PM-11PM,Thursday 9PM-11PM): ");
