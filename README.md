@@ -6,6 +6,7 @@
 - Database - Microsoft SQL 2016
 - Technologies - ADO.NET, Entity Framework Core, Fluent API
 - Principles - SOLID Principle (Liskov Substitution not implemented)
+- NuGet Packages - Microsoft.EntityFrameworkCore.Design (6.0.11), Microsoft.EntityFrameworkCore.SqlServer (6.0.11), System.Data.SqlClient (4.8.5), Castle.Windsor (5.1.2), EPPlus (6.1.1)
 
 # Microsoft Visual Studio 2022
 - Visite <a href ="https://learn.microsoft.com/en-us/visualstudio/install/install-visual-studio?view=vs-2022"> Microsoft Visual Studio 2022 </a> for proper IDE installation
