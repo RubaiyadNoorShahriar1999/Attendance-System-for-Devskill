@@ -61,6 +61,52 @@ namespace AttendanceSystem.Tasks
             return db.SaveChanges() > 0;
         }
 
+        public bool UpdateProfile(Student type)
+        {
+            Student student = db.Students.Where(x => x.Id == type.Id).FirstOrDefault();
+            if (student != null)
+            {
+                Console.WriteLine("Update options: 1. Update username 2. Update password");
+                Console.Write("Enter your choice: ");
+                int choice = int.Parse(Console.ReadLine().Replace(@"\s", ""));
+                if (choice == 1)
+                {
+                    Console.Write("\nEnter new username: ");
+                    student.UserName = Console.ReadLine();
+                    if (student.UserName == type.UserName)
+                    {
+                        Console.WriteLine("You're previous username was same. Please Enter a new username.");
+                        return false;
+                    }
+                    else
+                    {
+                        return db.SaveChanges() > 0;
+                    }
+                }
+                else if (choice == 2)
+                {
+                    Console.Write("\nEnter your new password: ");
+                    student.Password = Console.ReadLine();
+                    if (student.Password == type.Password)
+                    {
+                        Console.WriteLine("You're previous password was same. Please Enter a new password.");
+                        return false;
+                    }
+                    else
+                    {
+                        return db.SaveChanges() > 0;
+                    }                        
+                }
+                else
+                    return false;
+            }
+            else
+            {
+                Console.WriteLine("Student ID doesn't exist");
+                return false;
+            }
+        }
+
         public List<Student> GetStudentByTeacherId(int id)
         {
             return db.Students.Where(s => s.TeacherId == id).ToList();

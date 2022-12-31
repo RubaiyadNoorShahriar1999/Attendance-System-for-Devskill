@@ -138,7 +138,48 @@ namespace AttendanceSystem.Tasks
 
         public bool Update(Teacher type)
         {
-            throw new NotImplementedException();
+            Teacher teacher = db.Teachers.Where(x => x.Id== type.Id).FirstOrDefault();
+            if (teacher != null)
+            {
+                Console.WriteLine("Update options: 1. Update username 2. Update password");
+                Console.Write("Enter your choice: ");
+                int choice = int.Parse(Console.ReadLine().Replace(@"\s", ""));
+                if (choice == 1)
+                {
+                    Console.Write("\nEnter new username: ");
+                    teacher.UserName = Console.ReadLine();
+                    if (teacher.UserName == type.UserName)
+                    {
+                        Console.WriteLine("You're previous username was same. Please Enter a new username.");
+                        return false;
+                    }
+                    else
+                    {
+                        return db.SaveChanges() > 0;
+                    }
+                }
+                else if (choice == 2)
+                {
+                    Console.Write("\nEnter your new password: ");
+                    teacher.Password = Console.ReadLine();
+                    if (teacher.Password == type.Password)
+                    {
+                        Console.WriteLine("You're previous password was same. Please Enter a new password.");
+                        return false;
+                    }
+                    else
+                    {
+                        return db.SaveChanges() > 0;
+                    }
+                }
+                else
+                    return false;
+            }
+            else
+            {
+                Console.WriteLine("Teacher ID doesn't exist");
+                return false;
+            }
         }
     }
 }

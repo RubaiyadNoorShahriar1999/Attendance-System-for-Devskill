@@ -14,9 +14,9 @@ namespace AttendanceSystem.HomePages
         {
             while(true)
             {
-
+                int i = 0;
                 Console.WriteLine("\n\t\t\t\tWelcome to your Student Portal " + student.Name);
-                Console.Write("Services:\n1. Give your Attendance\n2. View your attendance sheet\n3. Logout\nEnter option: ");
+                Console.Write("Services:\n1. Give your Attendance\n2. View your attendance sheet\n3. Update profile\n4. Logout\nEnter option: ");
                 
                 int choice = int.Parse(Console.ReadLine().Replace(@"\s", ""));
 
@@ -86,6 +86,26 @@ namespace AttendanceSystem.HomePages
                     }
                 }
                 else if (choice == 3)
+                {
+                    Student student1 = new Student();
+                    student1.Id = student.Id;
+                    student1.UserName = student.UserName;
+                    student1.Password = student.Password;
+                    if(i == 0)
+                    {
+                        bool entity = new StudentServices().UpdateProfile(student1);
+                        if (entity)
+                        {
+                            i++;
+                            Console.WriteLine("Successfully Updated");
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("You need to re-login for further update.");
+                    }
+                }
+                else if (choice == 4)
                 {
                     break;
                 }
