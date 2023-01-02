@@ -16,6 +16,8 @@
 - Visit <a href="https://andyleonard.blog/2016/06/installing-sql-server-2016-developer-edition-one-example/"> Microsoft SQL Server Studio 2018</a> for proper IDE installation
 - Versions upper Microsoft SQL Server Studio 2018 will support this system
 
+# Incoming Updates
+- You can check the ongoing tasks and future updates for this project from here : <a href="https://github.com/users/RubaiyadNoorShahriar1999/projects/2"> Attendance System Roadmaps</a>
 
 ![leave_policy](https://user-images.githubusercontent.com/77986516/206782353-60a12283-85ce-4307-b77f-93bc11acdde7.png)
 
