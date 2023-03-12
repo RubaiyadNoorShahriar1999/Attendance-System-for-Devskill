@@ -24,5 +24,5 @@
 
 <h4 align="right">
 
-All rights reserved by **[Rubaiyad Noor Shahriar](https://flowcv.me/rubaiyad-noor-shahriar-hridoy)** and **[Dev Skill Authority](https://devskill.com/)**
+All rights reserved by **[Rubaiyad Noor Shahriar](https://flowcv.me/rubaiyad-noor-shahriar-hridoy)**
 </h4>
