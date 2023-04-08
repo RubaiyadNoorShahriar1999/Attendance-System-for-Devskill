@@ -9,7 +9,7 @@
 - NuGet Packages - Microsoft.EntityFrameworkCore.Design (6.0.11), Microsoft.EntityFrameworkCore.SqlServer (6.0.11), System.Data.SqlClient (4.8.5), Castle.Windsor (5.1.2), EPPlus (6.1.1)
 
 # Microsoft Visual Studio 2022
-- Visite <a href ="https://learn.microsoft.com/en-us/visualstudio/install/install-visual-studio?view=vs-2022"> Microsoft Visual Studio 2022 </a> for proper IDE installation
+- Visit <a href ="https://learn.microsoft.com/en-us/visualstudio/install/install-visual-studio?view=vs-2022"> Microsoft Visual Studio 2022 </a> for proper IDE installation
 - Any version: ```Enterprise, Professional, and Community``` editions of Microsoft Visual Studio 2022 will work
 
 # Microsoft SQL Server Management Studio 18
